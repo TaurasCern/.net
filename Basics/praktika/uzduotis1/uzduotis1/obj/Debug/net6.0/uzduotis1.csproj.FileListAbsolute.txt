@@ -1,0 +1,15 @@
+E:\CodeAcademy\paskaitos\Basics\Basics\praktika\uzduotis1\uzduotis1\bin\Debug\net6.0\uzduotis1.exe
+E:\CodeAcademy\paskaitos\Basics\Basics\praktika\uzduotis1\uzduotis1\bin\Debug\net6.0\uzduotis1.deps.json
+E:\CodeAcademy\paskaitos\Basics\Basics\praktika\uzduotis1\uzduotis1\bin\Debug\net6.0\uzduotis1.runtimeconfig.json
+E:\CodeAcademy\paskaitos\Basics\Basics\praktika\uzduotis1\uzduotis1\bin\Debug\net6.0\uzduotis1.dll
+E:\CodeAcademy\paskaitos\Basics\Basics\praktika\uzduotis1\uzduotis1\bin\Debug\net6.0\uzduotis1.pdb
+E:\CodeAcademy\paskaitos\Basics\Basics\praktika\uzduotis1\uzduotis1\obj\Debug\net6.0\uzduotis1.csproj.AssemblyReference.cache
+E:\CodeAcademy\paskaitos\Basics\Basics\praktika\uzduotis1\uzduotis1\obj\Debug\net6.0\uzduotis1.GeneratedMSBuildEditorConfig.editorconfig
+E:\CodeAcademy\paskaitos\Basics\Basics\praktika\uzduotis1\uzduotis1\obj\Debug\net6.0\uzduotis1.AssemblyInfoInputs.cache
+E:\CodeAcademy\paskaitos\Basics\Basics\praktika\uzduotis1\uzduotis1\obj\Debug\net6.0\uzduotis1.AssemblyInfo.cs
+E:\CodeAcademy\paskaitos\Basics\Basics\praktika\uzduotis1\uzduotis1\obj\Debug\net6.0\uzduotis1.csproj.CoreCompileInputs.cache
+E:\CodeAcademy\paskaitos\Basics\Basics\praktika\uzduotis1\uzduotis1\obj\Debug\net6.0\uzduotis1.dll
+E:\CodeAcademy\paskaitos\Basics\Basics\praktika\uzduotis1\uzduotis1\obj\Debug\net6.0\refint\uzduotis1.dll
+E:\CodeAcademy\paskaitos\Basics\Basics\praktika\uzduotis1\uzduotis1\obj\Debug\net6.0\uzduotis1.pdb
+E:\CodeAcademy\paskaitos\Basics\Basics\praktika\uzduotis1\uzduotis1\obj\Debug\net6.0\uzduotis1.genruntimeconfig.cache
+E:\CodeAcademy\paskaitos\Basics\Basics\praktika\uzduotis1\uzduotis1\obj\Debug\net6.0\ref\uzduotis1.dll
