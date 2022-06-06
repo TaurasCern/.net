@@ -11,7 +11,7 @@
 
             Console.Write("Iveskite skaiciu:");
             var sum = Convert.ToInt32(letter) + int.Parse(Console.ReadLine());
-            Console.WriteLine("ASCII kodas sudetasa su ivestu skaiciumi: {0}", sum);
+            Console.WriteLine("ASCII kodas sudetasa su ivestu skaiciumi: {0:C}", sum);
 
             Console.WriteLine();
             Console.WriteLine("Press any key to continue...");
