@@ -16,11 +16,6 @@
 
             foreach(string line in face)
             {
-                Console.WriteLine(line);
-            }
-
-            foreach(string line in face)
-            {
                 Console.WriteLine(line.Replace('*', '"'));
             }
         }
