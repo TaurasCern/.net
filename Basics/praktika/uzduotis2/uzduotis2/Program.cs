@@ -4,11 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("L");
-            Console.WriteLine("A");
-            Console.WriteLine("B");
-            Console.WriteLine("A");
-            Console.WriteLine("S");
+            Console.WriteLine("L\nA\nB\nA\nS");
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
