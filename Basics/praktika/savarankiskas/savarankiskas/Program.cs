@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            string noRing =      "      |      ";
+            string noRing =      "      |      ";   // ziedu konstantos(be const, nes nesimokinome)
             string smallRing =   "     #|#     ";
             string mediumRing =  "    ##|##    ";
             string largeRing =   "   ###|###   ";
@@ -28,6 +28,7 @@
 
             Console.WriteLine("Tower of Hanoi");
 
+            // ziedai sudedami pirmame stulpelyje
             col1row2 = smallRing;
             col1row3 = mediumRing;
             col1row4 = largeRing;
@@ -45,6 +46,7 @@
             Console.ReadKey();
             Console.WriteLine();
 
+            // ziedai sudedami pirmame stupelyje aukstinkojomis
             col1row1 = largestRing;
             col1row2 = largeRing;
             col1row3 = mediumRing;
@@ -63,6 +65,7 @@
             Console.ReadKey();
             Console.WriteLine();
 
+            // lentele istustinama
             col1row1 = noRing;
             col1row2 = noRing;
             col1row3 = noRing;
@@ -81,6 +84,7 @@
             Console.ReadKey();
             Console.WriteLine();
 
+            // piemoje eiluteje sudedami didziausi ziedai
             col1row5 = largestRing;
             col2row5 = largestRing;
             col3row5 = largestRing;
@@ -97,6 +101,8 @@
             Console.ReadKey();
             Console.WriteLine();
 
+
+            // ziedai isdeliojami pagal uzdavini
             col1row5 = largestRing;
             col2row5 = mediumRing;
             col3row4 = smallRing;
@@ -114,6 +120,7 @@
             Console.ReadKey();
             Console.WriteLine();
 
+            // ziedas nukopojuojamas i kita vieta
             col1row4 = col3row4;
 
             Console.WriteLine("Sestas punktas");
@@ -128,6 +135,7 @@
             Console.ReadKey();
             Console.WriteLine();
 
+            // antras stulpelis uzpildomas 3-iju # dydzio ziedais
             col2row1 = largeRing;
             col2row2 = largeRing;
             col2row3 = largeRing;
@@ -146,6 +154,7 @@
             Console.ReadKey();
             Console.WriteLine();
 
+            // pirmas ir antras stulpeliai yra isvalomi, o treciame pastamomas bokstas
             col1row4 = noRing;
             col1row5 = noRing;
             col2row1 = noRing;
@@ -170,6 +179,7 @@
             Console.ReadKey();
             Console.WriteLine();
 
+            // '#' pakeiciami su '"'
             Console.WriteLine("Devintas punktas");
             Console.WriteLine("1eil. {0}{1}{2}", col1row1, col2row1, col3row1);
             Console.WriteLine("2eil. {0}{1}{2}", col1row2, col2row2, col3row2.Replace('#','"'));
@@ -182,6 +192,7 @@
             Console.ReadKey();
             Console.WriteLine();
 
+            // vartotojas iraso savo zieda i 1 stulpeli, 1 eilute
             Console.WriteLine("Nupieskite zieda(13 simboliu):");
             col1row5 = Console.ReadLine();
             Console.WriteLine("Desimtas punktas");
