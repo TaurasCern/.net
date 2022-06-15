@@ -7,16 +7,18 @@
             Console.WriteLine("Iveskite temperatura:");
             int celsius = int.Parse(Console.ReadLine());
 
-            double far = celsius * 9 / 5 + 32;
+            double far = celsius * 1.8 + 32;
             double kelvin = celsius + 273.15;
 
             Console.WriteLine("Farenheit: {0}", far);
             Console.WriteLine("Kelvin: {0}", kelvin);
 
-            Console.WriteLine("Farenheit atgal i Celsiju: {0} | ar sutampa: {1}", (far - 32) * 0.5556, celsius == (far - 32) * (5 / 9));
+            // konvertuojamos temperaturos ir apvalinamos, kad sutaptu po atliktu matematiniu veiksmu
+            Console.WriteLine("Farenheit atgal i Celsiju: {0} | ar sutampa: {1}", Math.Round((far - 32) * 0.5556), celsius == Math.Round((far - 32) * 0.5556));
             Console.WriteLine("Kelvin atgal i Celsiju: {0} | ar sutampa: {1}", kelvin - 273.15, celsius == kelvin - 273.15);
-            Console.WriteLine("Perskaiciuota Farenheit i Kelivin: {0} | ar sutampa: {1}", ((far - 32) * 0.5556) + 273.15, ((far - 32) * 0.5556) + 273.15 == kelvin);
+            Console.WriteLine("Perskaiciuota Farenheit i Kelivin: {0} | ar sutampa: {1}", Math.Round(((far - 32) * 0.5556) + 273.15, 2), Math.Round(((far - 32) * 0.5556) + 273.15, 2) == kelvin);
 
+            // keistas termometro formos islaikymas, nes pamirsau kad galiu naudoti {0,5}
             Console.WriteLine("|------------------|");
             Console.WriteLine("|   ^F   _    ^C   |");
             Console.WriteLine("|{0}{1}- | | - {2}{3}|", new string(' ', 5 - ((celsius + 40) * 9 / 5 + 32).ToString().Length), (celsius + 40) * 9 / 5 + 32, celsius + 40, new string(' ', 5 - (celsius + 40).ToString().Length));
