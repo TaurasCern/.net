@@ -26,8 +26,8 @@
                 Math.Round(distance / 20 * 16), Math.Round(distance / 20 * 17), Math.Round(distance / 20 * 18), Math.Round(distance /20*19), Math.Round(distance / 20 * 20));
             Console.WriteLine(" |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |");
             // isemamas vienas simbolis proporcingas atstumui ir lentelei ir idedamas 'V' raide nurodyt susikirtimo taska
-            Console.WriteLine("_A____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____B_".Remove((int)Math.Round(Convert.ToDecimal(meetingPoint * (100/distance)) + 1), 1).Insert((int)Math.Round(Convert.ToDecimal(meetingPoint * (100 / distance))) + 1, "V"));
-            Console.WriteLine(" |" + new string('-', (int)Math.Round(Convert.ToDecimal(meetingPoint * (100 / distance))) - 1) + "|\n");
+            Console.WriteLine("_A____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____|____B_".Remove((int)Math.Round(meetingPoint * (100/distance) + 1), 1).Insert((int)Math.Round(meetingPoint * (100 / distance)) + 1, "V"));
+            Console.WriteLine(" |" + new string('-', (int)Math.Round(meetingPoint * (100 / distance)) - 1) + "|\n");
 
             Console.WriteLine("Susitikimo vieta: {0,5:0.00}km", meetingPoint);
             Console.WriteLine("Laikas po kurio susitiks transporto priemones: {0}s\n", (int)(timeToMeet * 3600));
