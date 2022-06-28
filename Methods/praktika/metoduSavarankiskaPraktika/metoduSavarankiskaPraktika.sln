@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32519.379
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "metoduSavarankiskaPraktika", "metoduSavarankiskaPraktika\metoduSavarankiskaPraktika.csproj", "{5F208557-37E5-46F9-A05F-E47C62C9B2B0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{176B5FC1-0AC4-4276-A644-CDB243AEC49D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetoduPraktikosTestai", "MetoduPraktikosTestai\MetoduPraktikosTestai.csproj", "{978106C0-7F1C-48D9-95C8-516192617C01}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F208557-37E5-46F9-A05F-E47C62C9B2B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F208557-37E5-46F9-A05F-E47C62C9B2B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F208557-37E5-46F9-A05F-E47C62C9B2B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F208557-37E5-46F9-A05F-E47C62C9B2B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{978106C0-7F1C-48D9-95C8-516192617C01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{978106C0-7F1C-48D9-95C8-516192617C01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{978106C0-7F1C-48D9-95C8-516192617C01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{978106C0-7F1C-48D9-95C8-516192617C01}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{978106C0-7F1C-48D9-95C8-516192617C01} = {176B5FC1-0AC4-4276-A644-CDB243AEC49D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A59B9B5E-58E7-416A-8471-CD4ACA11326F}
+	EndGlobalSection
+EndGlobal

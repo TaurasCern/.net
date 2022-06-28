@@ -3,7 +3,7 @@
     internal class Program
     {
         /*
-        public static void Main(string[] args)
+        public static void Main(string[] args)//1
         {
             PrintHello();
             PrintToScreen();
@@ -20,7 +20,7 @@
         }
         */
         /*
-        public static void Main(string[] args)
+        public static void Main(string[] args)//2
         {
             PrintToScreen();
         }
@@ -40,7 +40,7 @@
         }
         */
         /*
-        public static void Main(string[] args)
+        public static void Main(string[] args)//3
         {
             bool in1 = int.TryParse(Console.ReadLine(), out int num1);
             if(!in1) { Console.WriteLine("blogai ivestas skaicius"); }
@@ -55,7 +55,7 @@
         }
         */
         /*
-        public static void Main(string[] args)
+        public static void Main(string[] args)//4
         {
             string text = Console.ReadLine();
             WhiteSpaceCount(text);
@@ -68,7 +68,7 @@
         } 
         */
         
-        public static void Main(string[] args)
+        public static void Main(string[] args)//5
         {
             string text = Console.ReadLine();
             TextLength(text);
