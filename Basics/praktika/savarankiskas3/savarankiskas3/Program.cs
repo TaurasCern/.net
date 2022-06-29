@@ -12,6 +12,7 @@
             string gender = "N/A";
             string ageByCode = "N/A";
             DateTime birthDateByCode = new DateTime();
+            DateTime parsedBirthDate = new DateTime();
 
             Console.WriteLine("Iveskite varda ir pavarede:");
             string name = Console.ReadLine();
@@ -27,7 +28,7 @@
 
             Console.WriteLine("Iveskite amziu:");
             string age =  Console.ReadLine();
-            if (!String.IsNullOrEmpty(age)) { isAgeEntered = true; }
+            if (!String.IsNullOrEmpty(age) && int.TryParse(age, out _)) { isAgeEntered = true; }
 
             Console.Clear();
 
@@ -49,7 +50,7 @@
 
                 // validacija
                 DateTime.TryParse(tempYear + "-" + tempMonth + "-" + tempDay, out birthDateByCode);
-                DateTime.TryParse(birthDate, out DateTime parsedBirthDate);
+                DateTime.TryParse(birthDate, out parsedBirthDate);
                 
 
                 // nustatomas amzius naudojant asmens koda
@@ -88,9 +89,9 @@
             Console.WriteLine(new string('▓', 71));
             Console.WriteLine("{0}{1,19}▓{2,40}{3}", new string('▓', 6), "Asmens kodas", code, new string('▓', 5));
             Console.WriteLine(new string('▓', 71));
-            Console.WriteLine("{0}{1,19}▓{2,40}{3}", new string('▓', 6), "Amzius", ageByCode, new string('▓', 5));
+            Console.WriteLine("{0}{1,19}▓{2,40}{3}", new string('▓', 6), "Amzius", age, new string('▓', 5));
             Console.WriteLine(new string('▓', 71));
-            Console.WriteLine("{0}{1,19}▓{2,40}{3}", new string('▓', 6), "Gimimo data", birthDateByCode.ToShortDateString(), new string('▓', 5));
+            Console.WriteLine("{0}{1,19}▓{2,40}{3}", new string('▓', 6), "Gimimo data", parsedBirthDate.ToShortDateString(), new string('▓', 5));
             Console.WriteLine(new string('▓', 71));
             Console.WriteLine("{0}{1,19}▓{2,40}{3}", new string('▓', 6), "Amziaus patikimumas", ageValidity, new string('▓', 5));
             Console.WriteLine(new string('▓', 71));
