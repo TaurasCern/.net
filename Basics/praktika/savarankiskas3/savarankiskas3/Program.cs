@@ -46,7 +46,11 @@
                 // paemami 4,5/6,7 skaitmenys is asmens kodo ir nustatoma gimimo data
                 int tempMonth = int.Parse(code.Substring(3, 2));
                 int tempDay = int.Parse(code.Substring(5, 2));
-                birthDateByCode = new DateTime(tempYear, tempMonth, tempDay);
+
+                // validacija
+                DateTime.TryParse(tempYear + "-" + tempMonth + "-" + tempDay, out birthDateByCode);
+                DateTime.TryParse(birthDate, out DateTime parsedBirthDate);
+                
 
                 // nustatomas amzius naudojant asmens koda
                 ageByCode = (DateTime.Today.Year - birthDateByCode.Year).ToString() ;
@@ -59,13 +63,13 @@
                 }
                 else if (isDateEntered && !isAgeEntered)
                 {
-                    if (DateTime.Parse(birthDate) == birthDateByCode) { ageValidity = "Amzius patikimas"; }
+                    if (parsedBirthDate == birthDateByCode) { ageValidity = "Amzius patikimas"; }
                     else { ageValidity = "Amzius pameluotas"; }
                 }
                 else if (isAgeEntered && isDateEntered)
                 {
-                    if (int.Parse(age) == int.Parse(ageByCode) && DateTime.Parse(birthDate) == birthDateByCode) { ageValidity = "Amzius patikimas"; }
-                    else if (int.Parse(age) == int.Parse(ageByCode) || DateTime.Parse(birthDate) == birthDateByCode) { ageValidity = "Amzius nepatikimas"; }
+                    if (int.Parse(age) == int.Parse(ageByCode) && parsedBirthDate == birthDateByCode) { ageValidity = "Amzius patikimas"; }
+                    else if (int.Parse(age) == int.Parse(ageByCode) || parsedBirthDate == birthDateByCode) { ageValidity = "Amzius nepatikimas"; }
                     else { ageValidity = "Amzius pameluotas"; }
                 }
                 else if (!isAgeEntered && !isDateEntered) { ageValidity = "Patikimumui truksta duomenu"; }
