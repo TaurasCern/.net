@@ -19,7 +19,7 @@
             Console.WriteLine("Iveskite asmesns koda(11 skaitmenu):");
             string code = Console.ReadLine();
 
-            if (code.Length == 11) { codeValid = true; }
+            if (code.Length == 11 && long.TryParse(code, out _)) { codeValid = true; }
 
             Console.WriteLine("Iveskite gimimo data(YYYY-MM-DD):");
             string birthDate = Console.ReadLine();
