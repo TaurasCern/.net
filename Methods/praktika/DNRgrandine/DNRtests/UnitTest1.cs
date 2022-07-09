@@ -20,11 +20,34 @@ namespace DNRtests
             var expected = true;
             Assert.AreEqual(expected, actual);
         }
-
         [TestMethod]
         public void IsDNRValid_Test2()
         {
             var txt = "TCG-TAC-GAZ-TAC-CGT-CAG-ACT-TAA-CCA-GTC-CAT-AGA-GCT";
+            var actual = DNRgrandine.Program.IsDNRValid(txt);
+            var expected = false;
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void IsDNRValid_Test3()
+        {
+            var txt = "TCG-TAC";
+            var actual = DNRgrandine.Program.IsDNRValid(txt);
+            var expected = true;
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void IsDNRValid_Test4()
+        {
+            var txt = "TAX";
+            var actual = DNRgrandine.Program.IsDNRValid(txt);
+            var expected = false;
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void IsDNRValid_Test5()
+        {
+            var txt = "TA";
             var actual = DNRgrandine.Program.IsDNRValid(txt);
             var expected = false;
             Assert.AreEqual(expected, actual);

@@ -34,7 +34,8 @@ namespace DNRgrandine
                     case 2:
                         isValid = IsDNRValid(txt);
                         Console.Clear();
-                        Console.WriteLine("Validuota.\n");
+                        if (isValid) Console.WriteLine("Validi.\n");
+                        else Console.WriteLine("Nevalidi.\n");
                         break;
                     case 3:
                         Console.Clear();
@@ -59,7 +60,7 @@ namespace DNRgrandine
             {
                 Console.WriteLine("Menu:\n1) Pakeisti \"GCT\" i \"AGG\". \n2) Patikrinti ar \"CAT\" yra grandineje.\n3) Spausdinti Trecia ir Penkta segmenta.");
                 Console.WriteLine("4) Suskaiciuoti raidziu kieki grandineje.\n5) Ieskoti segmento kieki.\n6) Prideti segmenta.");
-                Console.WriteLine("7) Pasalinti segmenta.\n8) Pakeisti segmenta su kitu segmentu.\n9) Gryzti i pradini meniu.");
+                Console.WriteLine("7) Pasalinti segmenta.\n8) Pakeisti segmenta su kitu segmentu.\n9) Grizti i pradini meniu.");
                 int.TryParse(Console.ReadLine(), out int choice);
                 switch (choice)
                 {
@@ -119,6 +120,10 @@ namespace DNRgrandine
                     case 9:
                         Console.Clear();
                         Menu(txt);
+                        break;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Tokio pasirinkimo nera.\n");
                         break;
                 }
             }
@@ -181,7 +186,19 @@ namespace DNRgrandine
         /// </summary>
         /// <param name="txt"> dnr grandine </param>
         /// <returns> bool kintamasis nusakantis ar dnr grandine validi </returns>
-        public static bool IsDNRValid(string txt) => new Regex("^(A|T|C|G|-)+$").IsMatch(txt); // regex tikrina ar txt sudarytas tik is nusakytu simboliu
+        public static bool IsDNRValid(string txt)
+        {
+            string[] codes = txt.Split("-");
+            foreach(string code in codes)
+            {
+                if (code.Length != 3 || !(new Regex("^(A|T|C|G)+$").IsMatch(code))) // regex tikrina ar txt sudarytas tik is nusakytu simboliu
+                {
+                    Console.WriteLine("Nevalidi: {0}", code);
+                    return false;
+                }
+            }
+            return true; 
+        } 
         /// <summary>
         /// Metodas skirta dnr kodo ivedimui iki tol kol bus ivestas validus dnr kodas
         /// </summary>

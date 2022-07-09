@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Uzduotis5();
+            test();
         }
         
         public static void DoWhile()
@@ -104,6 +104,8 @@
             }
         }
         public static void Uzduotis5()
+
+
         {
             Random rand = new Random();
             int coin = rand.Next(1, 3);
@@ -125,6 +127,11 @@
                 coin = rand.Next(1, 3);
                 i++;
             }
+        }
+        public static void test()
+        {
+            var txt = "TCG-TAC";
+            Console.WriteLine(txt.Split("-")[0].Length + "-"  + txt.Split("-")[1].Length);
         }
     }
 }
