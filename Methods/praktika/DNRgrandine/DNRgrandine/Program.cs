@@ -138,7 +138,9 @@ namespace DNRgrandine
         /// <returns> </returns>
         public static string RemoveSpecifiedSegment(string txt, string segment)
         {
-            txt = Regex.Replace(txt.Replace(segment, "").Replace("-", ""), ".{3}", "$0-");
+            txt = txt.Replace(segment, "").Replace("-", "");
+            if (txt.Length < 3) { return txt; }
+            txt = Regex.Replace(txt, ".{3}", "$0-");
             return txt.Remove(txt.Length - 1, 1);
         }
         /// <summary>
@@ -168,7 +170,11 @@ namespace DNRgrandine
         /// </summary>
         /// <param name="txt"> dnr grandine </param>
         /// <returns> trecias ir penktas segmentai </returns>
-        public static string Get3rdAnd5thSegment(string txt) => txt.Substring(8, 3) + "-" + txt.Substring(16, 3);
+        public static string Get3rdAnd5thSegment(string txt)
+        {
+            if(txt.Split("-").Length < 5) { return "Grandine yra trumpesne nei 5 segmentai."; }
+            return txt.Substring(8, 3) + "-" + txt.Substring(16, 3);
+        }
         /// <summary>
         /// Metodas patikrinti ar dnr grandineje yra "CAT" kodas
         /// </summary>
