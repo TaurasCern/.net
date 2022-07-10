@@ -164,7 +164,7 @@ namespace DNRgrandine
         /// <param name="txt"> dnr grandine </param>
         /// <param name="dnr"> segmento kodas kurio kiekis ieskomas </param>
         /// <returns> nusakyto segmento kiekis </returns>
-        public static int FindDNRCount(string txt, string dnr) => (txt.Replace("-", "").Length - txt.Replace("-", "").Replace(dnr, "").Length) / 3;
+        public static int FindDNRCount(string txt, string dnr) => (txt.Replace("-", "").Length - txt.Replace(dnr, "").Replace("-", "").Length) / 3;
         /// <summary>
         /// Metodas gauti trecia ir penkta segmenta vinemae string kintamajame, atskirta per "-"
         /// </summary>
