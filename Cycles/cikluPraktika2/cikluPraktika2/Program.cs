@@ -372,7 +372,7 @@ namespace cikluPraktika2
                 if(num2  == 0)
                 {
                     Console.WriteLine("Is nulio dalyba negalima");
-                    num2 = ReadIntNumber();      
+                    num2 = ReadDoubleNumber();      
                 }
             }
 
