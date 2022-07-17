@@ -311,7 +311,6 @@ namespace cikluPraktika2
                     case 5:
                         if (arTesti) ans = Pow(ans, (int)num1);
                         else { ans = Pow(num1, (int)num2); }
-                        ans = Pow(num1, (int)num2);
                         Console.Clear();
                         Console.WriteLine("Ats: {0}", ans);
                         Menu(ans);
@@ -331,7 +330,6 @@ namespace cikluPraktika2
             }
 
         }
-
         public static void Menu(double ans)
         {
             string table = "1. Sudetis\n2. Atimtis\n3. Daugyba\n4. Dalyba\n5. Kelti laipsniu\n6. Traukti sakni";
@@ -361,7 +359,6 @@ namespace cikluPraktika2
                 }
             }
         }
-
         public static double Add(double num1, double num2) => num1 + num2;
         public static double Substract(double num1, double num2) => num1 - num2;
         public static double Multiply(double num1, double num2) => num1 * num2;
