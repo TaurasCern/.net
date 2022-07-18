@@ -6,13 +6,20 @@ namespace MasyvuPraktika
     {
         static void Main(string[] args)
         {
+            int[] numbers1 = new int[8] { 1, 2, 2, 4, 2, 7, 6, 1 };
+            int[] numbers2 = new int[7] { 5,3,7,6,8,7,10 };
             //Pyramid(5);
             //Reverse(12345);
             //PrintAttendance();
             //PrintAttendanceWithInput();
-            //Console.WriteLine(FindRepetitions());
-            //FindRepetitionsInTwoDimentionalArray();
-            FindRepetitionsInTwoDimentionalArrayString();
+            //Console.WriteLine(FindRepetitions(numbers));
+            //CreateTwoDimensionalArray();
+            //Console.WriteLine(FindRepetitionsInTwoDimentionalArray());
+            //FindRepetitionsInTwoDimentionalArrayString();
+            //Console.WriteLine(FindHighestNumber(numbers2));
+            //Console.WriteLine(String.Join(',',Sort(numbers2)));
+            //Console.WriteLine(String.Join(", ", CharArrayInput()));
+            Console.WriteLine(Sort4Letters(CharArrayInputStr()));
         }
         /// <summary>
         /// Uzduotis 1
@@ -105,14 +112,16 @@ namespace MasyvuPraktika
         /// </summary>
         public static string FindRepetitions(int[] numbers)
         {
-            //int[] numbers = new int[8] { 1, 2, 2, 4, 2, 7, 6, 1 };
             StringBuilder sb = new StringBuilder();
 
             for (int i = 0; i < numbers.Length; i++)
             {
                 for (int j = i; j < numbers.Length; j++)
                 {
-                    if (numbers[i] == numbers[j] && !sb.ToString().Contains(numbers[j].ToString()) && i != j) { sb.Append(numbers[j]).Append(','); }
+                    if (numbers[i] == numbers[j] 
+                    && !sb.ToString().Split(',').Contains(numbers[j].ToString()) 
+                    && i != j) 
+                    { sb.Append(numbers[j]).Append(','); }
                 }
             }
             return sb.ToString().Trim(',');
@@ -152,15 +161,13 @@ namespace MasyvuPraktika
         /// <summary>
         /// Uzduotis 7
         /// </summary>
-        public static void FindRepetitionsInTwoDimentionalArray()
+        public static string FindRepetitionsInTwoDimentionalArray()
         {
-            int[,] numbers = new int[3,3] { { 1, 1, 2},
-                                            { 3, 4, 8},
-                                            { 5, 4, 7} };
+            int[,] numbers = new int[3,4] { { 1, 1, 2, 11},
+                                            { 3, 4, 8, 12},
+                                            { 5, 4, 7, 11} };
             int arrIndex = 0;
             int[] oneDimesionNumbers = new int[numbers.Length];
-            
-            StringBuilder sb = new StringBuilder();
 
             for (int i = 0; i < numbers.GetLength(0); i++)
             {
@@ -170,7 +177,7 @@ namespace MasyvuPraktika
                     arrIndex++;
                 }
             }
-            Console.WriteLine(FindRepetitions(oneDimesionNumbers));
+            return FindRepetitions(oneDimesionNumbers);
         }
         /// <summary>
         /// Uzduotis 8
@@ -208,6 +215,120 @@ namespace MasyvuPraktika
                 }
             }
             Console.WriteLine(FindRepetitions(oneDimesionWords));
+        }
+        /// <summary>
+        /// Uzduotis 1 (Kartojimas)
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns></returns>
+        public static int FindLowestNumber(int[] numbers)
+        {
+            int lowestNumber = numbers[0];
+            for (int i = 1; i < numbers.Length; i++)
+            {
+                if (numbers[i] < lowestNumber)
+                {
+                    lowestNumber = numbers[i];
+                }
+            }
+            return lowestNumber;
+        }
+        /// <summary>
+        /// Uzduotis 2 (Kartojimas)
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns></returns>
+        public static int FindHighestNumber(int[] numbers)
+        {
+            int  highestNumber = numbers[0];
+            for (int i = 1; i < numbers.Length; i++)
+            {
+                if (numbers[i] > highestNumber)
+                {
+                    highestNumber = numbers[i];
+                }
+            }
+            return highestNumber;
+        }
+        /// <summary>
+        /// Uzduotis 3 (Kartojimas)
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns></returns>
+        public static int[] Sort(int[] numbers)
+        {        
+            for (int i = 0; i < numbers.Length - 1; i++)
+            {
+                for (int j = 0; j < numbers.Length - i - 1; j++)
+                {
+                    if (numbers[j] > numbers[j + 1]) 
+                    { 
+                        int temp = numbers[j];
+                        numbers[j] = numbers[j + 1];
+                        numbers[j + 1] = temp;
+                    }
+                }
+            }
+            return numbers;
+        }
+        public static char[] Sort(char[] character)
+        {
+            for (int i = 0; i < character.Length - 1; i++)
+            {
+                for (int j = 0; j < character.Length - i - 1; j++)
+                {
+                    if (character[j] > character[j + 1])
+                    {
+                        char temp = character[j];
+                        character[j] = character[j + 1];
+                        character[j + 1] = temp;
+                    }
+                }
+            }
+            return character;
+        }
+        public static char[] CharArrayInput()
+        {
+            char[] chars = new char[3];
+
+            for (int i = 0; i < chars.Length; i++)
+            {
+                Console.WriteLine("Iveskite {0} raide:", i + 1);
+                chars[i] = CharInput();
+            }
+            return Sort(chars);
+        }
+        public static string[] CharArrayInputStr()
+        {
+            string[] chars = new string[4];
+
+            for (int i = 0; i < chars.Length; i++)
+            {
+                Console.WriteLine("Iveskite {0} raide:", i + 1);
+                chars[i] = CharInput().ToString();
+            }
+            return chars;
+        }
+        public static char CharInput()
+        {
+            char letter = Console.ReadKey().KeyChar;
+            Console.WriteLine(Environment.NewLine);
+            while (!Char.IsUpper(letter))
+            {
+                Console.WriteLine("Raide nera didzioji{0}", Environment.NewLine);
+                letter = Console.ReadKey().KeyChar;
+            }
+            return letter;
+        }
+        public static string SortLetters(string[] chars)
+        {
+            char[] characters = new char[chars.Length];
+            for (int i = 0; i < chars.Length; i++)
+            {
+                characters[i] = chars[i][0];
+            }
+
+            return String.Join('-',Sort(characters));
         }
         /*
          3. Parasykite programa, kuri leistu ivesti kiek zmoniu siandiena atejo i pamoka. 
