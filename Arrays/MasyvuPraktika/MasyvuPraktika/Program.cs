@@ -19,7 +19,7 @@ namespace MasyvuPraktika
             //Console.WriteLine(FindHighestNumber(numbers2));
             //Console.WriteLine(String.Join(',',Sort(numbers2)));
             //Console.WriteLine(String.Join(", ", CharArrayInput()));
-            Console.WriteLine(Sort4Letters(CharArrayInputStr()));
+            Console.WriteLine(SortLetters(CharArrayInputStr()));
         }
         /// <summary>
         /// Uzduotis 1
