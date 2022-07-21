@@ -6,6 +6,33 @@ namespace ListPraktika
     {
         static void Main(string[] args)
         {
+            //string sentence = "as esu ir Labas Kodelskis labai megstu programuoti";
+            //IsmetytiZodzius(sentence);
+            List<string> types = new List<string> 
+            { 
+                "Sirdziu",
+                "Bugnu",
+                "Vynu",
+                "Kryziu"
+            };
+            List<string> cards = new List<string> 
+            {
+                "Tuzas",
+                "Dviake",
+                "Triake",
+                "Keturake",
+                "Penkake",
+                "Sesake",
+                "Septynake",
+                "Astuonake",
+                "Devynakės",
+                "Desimtake",
+                "Valetas",
+                "Dama",
+                "Karalius"
+            };
+
+            PrintDeck(SukonstruotiKalade(types, cards));
         }
         // 07-19
         public static int FindHighestNumber(List<int> numbers) => numbers.Max();
@@ -53,7 +80,7 @@ namespace ListPraktika
             return numbers;
         }
         //---------------------------------------------------------------------------
-        // 07-20
+        // 07-20 + 7-21
         /// <summary>
         /// 1
         /// </summary>
@@ -125,26 +152,67 @@ namespace ListPraktika
         /// <summary>
         /// 5
         /// </summary>
-        public static List<string> IsmetytiZodziai(string sentence)
+        public static List<string> IsmetytiZodzius(string sentence)
         {
             List<string> words = new List<string>();
             List<string> wordsLessThan5 = new List<string>();
             string[] wordsArr = sentence.Split(" ");
+
             foreach(string word in wordsArr)
             {
                 if(word.Length >= 5) { words.Add(word); }   
                 else { wordsLessThan5.Add(word); }
             }
+
             words.Sort();
-            wordsLessThan5.Sort();
+
             return CombineLists(wordsLessThan5, words);
         }
         public static List<string> CombineLists(List<string> a, List<string> b)
         {
             List<string> combined = new List<string>();
-            combined.AddRange(a);
-            combined.AddRange(b);
+
+            foreach (string word in a)
+            {
+                combined.Add(word);
+            }
+            foreach(string word in b)
+            {
+                combined.Add(word);
+            }
+
+            Console.WriteLine(String.Join(" ", combined));
+
             return combined;
+        }
+        /// <summary>
+        /// 6
+        /// </summary>
+        public static List<string> SukonstruotiKalade(List<string> types, List<string> cards)
+        {
+            List<string> deck = new List<string>();
+
+            foreach(var type in types)
+            {
+                foreach(var card in cards)
+                {
+                    deck.Add(type + " " + card);
+                }
+            }
+
+            return SortDeck(deck);
+        }
+        public static List<string> SortDeck(List<string> deck)
+        {
+            deck.Sort();
+            return deck;
+        }
+        public static void PrintDeck(List<string> deck)
+        {
+            foreach(var card in deck)
+            {
+                Console.WriteLine(card);
+            }
         }
     }
 }

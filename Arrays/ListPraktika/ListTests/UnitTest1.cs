@@ -102,16 +102,14 @@ namespace ListTests
             Assert.AreEqual(expected, actual);
         }
         [TestMethod]
-        public void IsmetytiZodziai_Test()
+        public void IsmetytiZodzius_Test()
         {
-            var fake = "aa bbbbb ee ddd ff zzzzz aaaaaa";
-            var actual = ListPraktika.Program.IsmetytiZodziai(fake);
-            foreach(var a in actual)
-            {            
-                Trace.WriteLine(a);
-            }
+            var fake = "as esu ir Labas Kodelskis labai megstu programuoti";
+            var actual = ListPraktika.Program.IsmetytiZodzius(fake);
+            var expected = "as esu ir Kodelskis labai Labas megstu programuoti".Split(" ");
 
-            var expected = new List<string> {"aa", "ddd", "ee", "ff", "aaaaaa", "bbbbb", "zzzzz"};
+            Trace.WriteLine(String.Join(" ", actual));
+
             CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
