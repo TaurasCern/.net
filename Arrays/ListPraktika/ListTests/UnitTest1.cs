@@ -106,9 +106,15 @@ namespace ListTests
         {
             var fake = "aa bbbbb ee ddd ff zzzzz aaaaaa";
             var actual = ListPraktika.Program.IsmetytiZodziai(fake);
-            var expected = new List<string> {"aaaaaa", "bbbbb", "zzzzz"};
+            foreach(var a in actual)
+            {            
+                Trace.WriteLine(a);
+            }
+
+            var expected = new List<string> {"aa", "ddd", "ee", "ff", "aaaaaa", "bbbbb", "zzzzz"};
             CollectionAssert.AreEqual(expected, actual);
         }
+        [TestMethod]
         public void CombineLists_Test()
         {
             var fake1 = new List<string>() { "aaa", "aaa", "aaa"};

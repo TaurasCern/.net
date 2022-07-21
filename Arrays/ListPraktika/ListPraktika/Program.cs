@@ -128,25 +128,22 @@ namespace ListPraktika
         public static List<string> IsmetytiZodziai(string sentence)
         {
             List<string> words = new List<string>();
+            List<string> wordsLessThan5 = new List<string>();
             string[] wordsArr = sentence.Split(" ");
             foreach(string word in wordsArr)
             {
-                if(word.Length >= 5) { words.Add(word); }              
+                if(word.Length >= 5) { words.Add(word); }   
+                else { wordsLessThan5.Add(word); }
             }
             words.Sort();
-            return words;
+            wordsLessThan5.Sort();
+            return CombineLists(wordsLessThan5, words);
         }
         public static List<string> CombineLists(List<string> a, List<string> b)
         {
             List<string> combined = new List<string>();
-            foreach(string st in a)
-            {
-                combined.Add(st);
-            }
-            foreach (string st in b)
-            {
-                combined.Add(st);
-            }
+            combined.AddRange(a);
+            combined.AddRange(b);
             return combined;
         }
     }
