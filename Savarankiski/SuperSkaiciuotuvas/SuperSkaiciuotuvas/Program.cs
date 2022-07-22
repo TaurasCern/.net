@@ -142,7 +142,11 @@
                 default:
                     break;
             }
-            Reset();
+            isFirst = false;
+            isNewMove = false;
+            isContinue = false;
+            firstNumber = null;
+            secondNumber = null;
             Console.WriteLine("Ats: {0}", result);
         }
 
@@ -197,14 +201,8 @@
 
         public static double Rezultatas() => result ?? 0;
         public static void Reset() 
-        { 
+        {
             result = null;
-            isFirst = false;
-            isNewMove = false;
-            isContinue = false;
-            firstNumber = null;
-            secondNumber = null;
-            Console.Clear();
         }
     }
 }
