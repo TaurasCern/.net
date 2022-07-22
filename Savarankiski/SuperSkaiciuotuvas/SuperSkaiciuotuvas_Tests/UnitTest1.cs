@@ -50,6 +50,72 @@ namespace SuperSkaiciuotuvas_Tests
             var actual = SuperSkaiciuotuvas.Program.Rezultatas();
 
             Assert.AreEqual(expected, actual);
-        }  
+        }
+
+        [TestMethod()]
+        public void Add_Test()
+        {
+            var fake = 15;
+            var fake1 = 15;
+
+            var expected = 30d;
+
+            var actual = SuperSkaiciuotuvas.Program.Add(fake, fake1);
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod()]
+        public void Substract_Test()
+        {
+            var fake = 15;
+            var fake1 = 15;
+
+            var expected = 0d;
+
+            var actual = SuperSkaiciuotuvas.Program.Substract(fake, fake1);
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod()]
+        public void Multiply_Test()
+        {
+            var fake = 13;
+            var fake1 = 3;
+
+            var expected = 39d;
+
+            var actual = SuperSkaiciuotuvas.Program.Multiply(fake, fake1);
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod()]
+        public void Divide_Test()
+        {
+            var fake = 15;
+            var fake1 = 15;
+
+            var expected = 1d;
+
+            var actual = SuperSkaiciuotuvas.Program.Divide(fake, fake1);
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod()]
+        public void Power_Test()
+        {
+            var fake = 4;
+            var fake1 = 3;
+
+            var expected = 64d;
+
+            var actual = SuperSkaiciuotuvas.Program.Power(fake, fake1);
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod()]
+        public void SquareRoot_Test()
+        {
+            var fake = 25;
+
+            var expected = 5d;
+
+            var actual = SuperSkaiciuotuvas.Program.SquareRoot(fake);
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
