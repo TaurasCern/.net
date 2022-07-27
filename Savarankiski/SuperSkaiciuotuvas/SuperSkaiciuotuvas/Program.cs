@@ -54,7 +54,7 @@
         /// Method to check if exit option was chosen
         /// </summary>
         public static bool IsExit(string input) 
-            => (isFirst && !isNewMove && !isContinue && !isOperation &&input == "2") 
+            => (isFirst && !isNewMove && !isContinue && !isOperation && input == "2") 
             || (!isFirst && !isNewMove && !isContinue && !isOperation && input == "3");
         /// <summary>
         /// Method to call Calculate() according to applications status
