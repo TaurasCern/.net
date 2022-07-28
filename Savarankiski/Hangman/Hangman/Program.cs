@@ -6,10 +6,13 @@ namespace Hangman
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.GetEncoding(1200);
+            Console.InputEncoding = Encoding.GetEncoding(1200);
             var names = new string[] { "Ignas", "Dominykas", "Matas", "Martynas", "Tauras", "Emilija", "Ieva", "Viktorija", "Agata" ,"Justina" };
             var cities = new string[] { "Kaunas", "Vilnius", "Kėdainiai", "Klaipėda", "Telsiai", "Tauragė", "Plungė", "Panevėžys", "Lazdijai", "Alytus" };
             var countries = new string[] { "Lietuva", "Latvija", "Estija", "Vokietija", "Japonija", "Kinija", "Prancūzija", "Ukraina", "Ispanija", "Rusija" };
             var other = new string[] { "Bananas", "Obuolys", "Kriaušė", "Agurkas", "Pomidoras", "Svogunas", "Abrikosas", "Čedario sūris", "Česnakas", "Lokomotyvas"};
+
 
             Start(names, cities, countries, other);
         }
