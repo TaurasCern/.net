@@ -2,18 +2,20 @@
 
 namespace Hangman
 {
-    internal class Program
+    public class Program
     {
-        //public static wrongg
         static void Main(string[] args)
         {
             var names = new string[] { "Ignas", "Dominykas", "Matas", "Martynas", "Tauras", "Emilija", "Ieva", "Viktorija", "Agata" ,"Justina" };
-            var cities = new string[] { "Kaunas", "Vilnius", "Kėdainiai", "Klaipėda", "Telšiai", "Tauragė", "Plungė", "Panevėžys", "Lazdijai", "Alytus" };
+            var cities = new string[] { "Kaunas", "Vilnius", "Kėdainiai", "Klaipėda", "Telsiai", "Tauragė", "Plungė", "Panevėžys", "Lazdijai", "Alytus" };
             var countries = new string[] { "Lietuva", "Latvija", "Estija", "Vokietija", "Japonija", "Kinija", "Prancūzija", "Ukraina", "Ispanija", "Rusija" };
             var other = new string[] { "Bananas", "Obuolys", "Kriaušė", "Agurkas", "Pomidoras", "Svogunas", "Abrikosas", "Čedario sūris", "Česnakas", "Lokomotyvas"};
 
             Start(names, cities, countries, other);
         }
+        /// <summary>
+        /// Hangman menu state machine
+        /// </summary>
         public static void Start(string[] names, string[] cities, string[] countries, string[] other)
         {
             PrintMenu();
@@ -57,52 +59,51 @@ namespace Hangman
                 Start(names, cities, countries, other);
             }
         }
+        /// <summary>
+        /// Main method of the hangman game
+        /// </summary>
         public static void Hangman(ref string[] words, string theme)
         {
-            string word = PickRandomString(words);
-            StringBuilder sb = new StringBuilder(new string('_', word.Length));
+            string word = PickRandomString(words, new Random());
             var fails = 0;
+
+            StringBuilder wordField = new StringBuilder(new string('_', word.Length));
+
             List<string> guessed = new List<string>();
 
             bool isGuessed = false;
             bool isBadInput = false;
+            bool isNotLetter = false;
 
-            while(true)
+            while (true)
             {
                 Console.Clear();
-                PrintGame(sb.ToString(), theme, fails);
 
-                PrintError(isGuessed,isBadInput);
-
-                Console.Write("Spejimas: ");
-                var guess = Console.ReadLine();
+                PrintGame(wordField.ToString(), theme, fails);
+                Console.WriteLine("Jau spetos raides: {0}", String.Join(", ", guessed));
                 Console.WriteLine();
 
-                if (guessed.Contains(guess))
-                {
-                    isGuessed = true;
-                    continue;
-                }
-                else if(guess.Length != word.Length && guess.Length != 1)
-                {
-                    isBadInput = true;
-                    continue;
-                }
+                PrintError(ref isGuessed, ref isBadInput, ref isNotLetter);
 
-                if (guess.Length > 1)
+                Console.Write("Spejimas: ");
+                var guess = Console.ReadLine().ToLower();
+                Console.WriteLine();
+
+                if(CheckForError(guessed, word, guess, ref isNotLetter, ref isGuessed, ref isBadInput)) { continue; }
+
+                wordField = Guess(wordField, word, ref fails, guess, guessed);
+
+                if (CheckIfLost(word, guess, fails))
                 {
-                    if (CheckIfWon(word, guess))
-                    {
-                        break;
-                    }
+                    Console.Clear();
+                    Console.WriteLine("Pralaimejote{0}", Environment.NewLine);
+                    break;
                 }
-                else
+                if (CheckIfWon(word, wordField.ToString(), guess))
                 {
-                    sb = LetterGuess(sb, word, ref fails, guess, guessed);
-                    if (CheckIfWon(sb, fails))
-                    {
-                        break;
-                    }
+                    Console.Clear();
+                    Console.WriteLine("Laimejote{0}", Environment.NewLine);
+                    break;
                 }
             }
 
@@ -110,17 +111,59 @@ namespace Hangman
 
             words = ArrayRemove(words, word);
         }
-        public static void PrintError(bool isGuessed, bool isBadInput)
+        /// <summary>
+        /// Method to validate input
+        /// </summary>
+        /// <returns> True if not valid, False if valid </returns>
+        public static bool CheckForError(List<string> guessed, string word, string guess, ref bool isNotLetter, ref bool isGuessed, ref bool isBadInput)
+        {
+            if (guessed.Contains(guess.ToLower()))
+            {
+                isGuessed = true;
+                return true;
+            }
+            else if (guess.Length != word.Length && guess.Length != 1)
+            {
+                isBadInput = true;
+                return true;
+            }
+            else if(guess.Length > 0)
+            {
+                foreach(var ch in guess)
+                {
+                    if (!Char.IsLetter(ch))
+                    {
+                        isNotLetter = true;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        /// <summary>
+        /// Method to print input error
+        /// </summary>
+        public static void PrintError(ref bool isGuessed, ref bool isBadInput, ref bool isNotLetter)
         {
             if (isGuessed)
             {
                 Console.WriteLine("Raide jau buvo speta");
+                isGuessed = false;
             }
             else if (isBadInput)
             {
                 Console.WriteLine("Ivestas neteisingo ilgio zodis");
+                isBadInput = false;
+            }
+            else if (isNotLetter)
+            {
+                Console.WriteLine("Ivestyje yra skaiciu ar simboliu");
+                isNotLetter = false;
             }
         }
+        /// <summary>
+        /// Method to print the theme menu
+        /// </summary>
         public static void PrintMenu()
         {
             Console.Clear();
@@ -134,6 +177,39 @@ namespace Hangman
                 Environment.NewLine);
 
         }
+        /// <summary>
+        /// Methos to ask the user wants to continue the game
+        /// </summary>
+        public static bool Continue()
+        {
+            Console.WriteLine("Ar norite testi zaidima?(T/N)");
+
+            var choice = Console.ReadKey().KeyChar.ToString();
+
+            Console.Clear();
+
+            if (choice.ToUpper() == "T")
+            {
+                return true;
+            }
+            else if (choice.ToUpper() == "N")
+            {
+                return false;
+            }
+            else
+            {
+                Console.Clear();
+                Continue();
+            }
+
+            return false;
+        }
+        /// <summary>
+        /// Mehtod to process and print the hangman screen
+        /// </summary>
+        /// <param name="word"></param>
+        /// <param name="theme"></param>
+        /// <param name="fails"></param>
         public static void PrintGame(string word, string theme, int fails)
         {
             string[] body = new string[] {    "o",
@@ -161,47 +237,64 @@ namespace Hangman
             Console.WriteLine("|           ");
             
 
-            Console.WriteLine("Zodis: {0}", word);
 
+            Console.Write("Zodis: ");
+            foreach(var letter in word)
+            {
+                Console.Write(letter + " ");
+            }
+            Console.WriteLine();
         }
-        public static string PickRandomString(string[] words)
+        /// <summary>
+        /// Method to pick a random string out of a string array
+        /// </summary>
+        /// <returns> random string out of the array </returns>
+        public static string PickRandomString(string[] words, Random random) => words[random.Next(0, words.Length)];
+        /// <summary>
+        /// Method to check if the user won (called after CheckIfLost method)
+        /// </summary>
+        /// <returns> True if won, false if not</returns>
+        public static bool CheckIfWon(string word, string wordField, string guess)
         {
-            var random = new Random();
+            if (guess.Length > 1)
+            {
+                if(word.ToLower() == guess.ToLower())
+                {
+                    return true;
+                }
+            }
+            else if (guess.Length == 1)
+            {
+                if (!wordField.Contains("_"))
+                {
+                    return true;
+                }
+            }
 
-            return words[random.Next(0, words.Length)];
-        }
-        public static bool CheckIfWon(StringBuilder sb, int fails)
-        {
-            if (!sb.ToString().Contains('_') && (fails < 7))
-            {
-                Console.Clear();
-                Console.WriteLine("Laimejote{0}",Environment.NewLine);
-                return true;
-            }
-            else if (fails == 7)
-            {
-                Console.Clear();
-                Console.WriteLine("Pralaimejote{0}", Environment.NewLine);
-                return true;
-            }
             return false;
         }
-        public static bool CheckIfWon(string word, string guess)
+        /// <summary>
+        /// Method to check if user lost (called before CheckIfWon method)
+        /// </summary>
+        /// <returns> True if lost, False if not</returns>
+        public static bool CheckIfLost(string word, string guess, int fails)
         {
-            if (word.ToLower() != guess.ToLower())
+            if(guess.Length == 1 && fails > 6)
             {
-                Console.Clear();
-                Console.WriteLine("Pralaimejote");
-                return false;
-            }
-            else
-            {
-                Console.Clear();
-                Console.WriteLine("Laimejote");
                 return true;
             }
+            else if(guess.Length > 1 && word.ToLower() != guess.ToLower())
+            {
+                return true;
+            }
+
+            return false;
         }
-        public static StringBuilder LetterGuess(StringBuilder sb, string word, ref int fails, string guess, List<string> guessed)
+        /// <summary>
+        /// Method to process a guess
+        /// </summary>
+        /// <returns> wordField with '_' replaced with guessed letters </returns>
+        public static StringBuilder Guess(StringBuilder wordField, string word, ref int fails, string guess, List<string> guessed)
         {
             if (!word.ToLower().Contains(guess.ToLower()))
             {
@@ -213,40 +306,22 @@ namespace Hangman
                 {
                     if (word[i].ToString().ToLower() == guess.ToLower())
                     {
-                        sb[i] = word[i];
+                        wordField[i] = word[i];
                     }
                 }
             }
+            if (!guessed.Contains(guess.ToLower()))
+            {
+                guessed.Add(guess.ToLower());
+            }
 
-            guessed.Add(guess.ToLower());
-            guessed.Add(guess.ToUpper());
-
-            return sb;
+            return wordField;
         }
-        public static bool Continue()
-        {
-            Console.WriteLine("Ar norite testi zaidima?(T/N)");
 
-            var choice = Console.ReadKey().KeyChar.ToString();
-
-            Console.Clear();
-
-            if (choice.ToUpper() == "T")
-            {
-                return true;
-            }
-            else if (choice.ToUpper() == "N")
-            {
-                return false;
-            }
-            else
-            {
-                Console.Clear();
-                Continue();
-            }
-
-            return false;
-        }
+        /// <summary>
+        /// Method to remove sent entry(word) in the string array
+        /// </summary>
+        /// <returns> array without the sent entry(word)</returns>
         public static string[] ArrayRemove(string[] words, string word)
         {
             var newWords = new string[words.Length - 1];
