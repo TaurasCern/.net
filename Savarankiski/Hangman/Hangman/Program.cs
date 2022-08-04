@@ -9,7 +9,7 @@ namespace Hangman
             Console.OutputEncoding = Encoding.GetEncoding(1200);
             Console.InputEncoding = Encoding.GetEncoding(1200);
             var names = new string[] { "Ignas", "Dominykas", "Matas", "Martynas", "Tauras", "Emilija", "Ieva", "Viktorija", "Agata" ,"Justina" };
-            var cities = new string[] { "Kaunas", "Vilnius", "Kėdainiai", "Klaipėda", "Telsiai", "Tauragė", "Plungė", "Panevėžys", "Lazdijai", "Alytus" };
+            var cities = new string[] { "Kaunas", "Vilnius", "Kėdainiai", "Klaipėda", "Telšiai", "Tauragė", "Plungė", "Panevėžys", "Lazdijai", "Alytus" };
             var countries = new string[] { "Lietuva", "Latvija", "Estija", "Vokietija", "Japonija", "Kinija", "Prancūzija", "Ukraina", "Ispanija", "Rusija" };
             var other = new string[] { "Bananas", "Obuolys", "Kriaušė", "Agurkas", "Pomidoras", "Svogunas", "Abrikosas", "Čedario sūris", "Česnakas", "Lokomotyvas"};
 
@@ -181,7 +181,7 @@ namespace Hangman
 
         }
         /// <summary>
-        /// Methos to ask the user wants to continue the game
+        /// Method to ask the user wants to continue the game
         /// </summary>
         public static bool Continue()
         {
@@ -208,7 +208,7 @@ namespace Hangman
             return false;
         }
         /// <summary>
-        /// Mehtod to process and print the hangman screen
+        /// Method to process and print the hangman screen
         /// </summary>
         /// <param name="word"></param>
         /// <param name="theme"></param>
