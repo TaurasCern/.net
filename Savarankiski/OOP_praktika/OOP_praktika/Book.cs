@@ -10,13 +10,13 @@ namespace OOP_praktika
     {
         private string name;
         private string description;
-        private string[] pages;
-        private List<Review> review;
+        private string[] pages = Array.Empty<string>();
+        private List<Review> reviews = new List<Review>();
 
         public List<Review> Reviews
         {
-            get { return review; }
-            set { review = value; }
+            get { return reviews; }
+            set { reviews = value; }
         }
 
         public string Description
@@ -41,16 +41,25 @@ namespace OOP_praktika
             get { return name; }
             set { name = value; }
         }
-
-        public Book(string name, string description, string[] pages)
+        public Book()
+        {
+            this.name = "";
+            this.description = "";
+            this.pages = new string[0];
+        }
+        public Book(string name, string description, string[] pages, List<Review> reviews)
         {
             this.Name = name;
             this.Description = description;
             this.Pages = pages;
+            this.Reviews = reviews;
         }
-        public Book()
+        public Book(Book book)
         {
-
+            this.Name = book.Name;
+            this.Description = book.Description;
+            this.Pages = book.Pages;
+            this.Reviews = book.reviews;
         }
         public override string ToString()
         {
