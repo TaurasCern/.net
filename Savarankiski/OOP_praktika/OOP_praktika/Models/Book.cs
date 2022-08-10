@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOP_praktika
+namespace OOP_praktika.Models
 {
     internal class Book
     {
@@ -16,13 +16,13 @@ namespace OOP_praktika
         public List<Review> Reviews
         {
             get { return reviews; }
-            set { reviews = value; }
+            private set { reviews = value; }
         }
 
         public string Description
         {
             get { return description; }
-            set { description = value; }
+            private set { description = value; }
         }
 
         public int PageCount
@@ -33,37 +33,36 @@ namespace OOP_praktika
         public string[] Pages
         {
             get { return pages; }
-            set { pages = value; }
+            private set { pages = value; }
         }
 
         public string Name
         {
             get { return name; }
-            set { name = value; }
+            private set { name = value; }
         }
         public Book()
         {
-            this.name = "";
-            this.description = "";
-            this.pages = new string[0];
+            name = "";
+            description = "";
         }
         public Book(string name, string description, string[] pages, List<Review> reviews)
         {
-            this.Name = name;
-            this.Description = description;
-            this.Pages = pages;
-            this.Reviews = reviews;
+            Name = name;
+            Description = description;
+            Pages = pages;
+            Reviews = reviews;
         }
         public Book(Book book)
         {
-            this.Name = book.Name;
-            this.Description = book.Description;
-            this.Pages = book.Pages;
-            this.Reviews = book.reviews;
+            Name = book.Name;
+            Description = book.Description;
+            Pages = book.Pages;
+            Reviews = book.reviews;
         }
         public override string ToString()
         {
-            return String.Format("Title: {0}{1}{2}", this.Name, Environment.NewLine, this.Description);
+            return string.Format("Title: {0}{1}{2}", Name, Environment.NewLine, Description);
         }
     }
 }

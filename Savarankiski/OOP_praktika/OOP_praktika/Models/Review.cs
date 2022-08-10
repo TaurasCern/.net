@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOP_praktika
+namespace OOP_praktika.Models
 {
     internal class Review
     {
@@ -13,33 +13,35 @@ namespace OOP_praktika
         public string Name
         {
             get { return name; }
-            set { name = value; }
+            private set { name = value; }
         }
         private string email;
 
         public string Email
         {
             get { return email; }
-            set { email = value; }
+            private set { email = value; }
         }
         private string review;
 
         public string Comment
         {
             get { return review; }
-            set { review = value; }
+            private set { review = value; }
         }
 
-        public Review(string name, string email, string comment)
+        public Review(string name, string email, string comment) : this()
         {
-            this.Name = name;
-            this.Email = email;
-            this.Comment = comment;
+            Name = name;
+            Email = email;
+            Comment = comment;
         }
         public Review()
         {
-
+            this.Name = "";
+            this.Email = "";
+            this.Comment = "";
         }
-        public override string ToString() => this.Name + ":" + Environment.NewLine + this.Comment;
+        public override string ToString() => Name + ":" + Environment.NewLine + Comment;
     }
 }

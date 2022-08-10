@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOP_praktika
+namespace OOP_praktika.Models
 {
     internal class Person
     {
@@ -31,26 +31,26 @@ namespace OOP_praktika
             set { lastName = value; }
         }
 
-        public string Name 
+        public string Name
         {
             get { return name; }
-            set { name = value; } 
+            set { name = value; }
         }
         public string FullName
         {
-            get { return this.Name + " " + this.LastName; }
+            get { return Name + " " + LastName; }
         }
 
         public Person(string name, string lastName, DateTime birthDate)
         {
-            this.Name = name;
-            this.LastName = lastName;
-            this.BirthDate = birthDate;
+            Name = name;
+            LastName = lastName;
+            BirthDate = birthDate;
         }
         public Person()
         {
 
         }
-        public override string ToString() => String.Format(this.FullName + ", " + this.BirthDate.ToShortDateString());
-        }
+        public override string ToString() => string.Format(FullName + ", " + BirthDate.ToShortDateString());
+    }
 }

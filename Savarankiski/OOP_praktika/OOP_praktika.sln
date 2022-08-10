@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOP_praktika", "OOP_praktika\OOP_praktika.csproj", "{FB6B344E-9CB9-43BF-A0AC-95D0DD801875}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOP_praktika", "OOP_praktika\OOP_praktika.csproj", "{FB6B344E-9CB9-43BF-A0AC-95D0DD801875}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOP_praktika_homework", "OOP_praktika_homework\OOP_praktika_homework.csproj", "{72D255C7-C3A5-4CF9-9CBE-9A476393CD62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOP_praktika_homework", "OOP_praktika_homework\OOP_praktika_homework.csproj", "{72D255C7-C3A5-4CF9-9CBE-9A476393CD62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

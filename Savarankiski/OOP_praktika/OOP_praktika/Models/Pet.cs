@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOP_praktika
+namespace OOP_praktika.Models
 {
     internal class Pet
     {
@@ -14,15 +14,15 @@ namespace OOP_praktika
 
         public Pet(string name, DateTime birhtDate, string disposition)
         {
-            this.Name = name;
-            this.BirhtDate = birhtDate;
-            this.Disposition = disposition;
+            Name = name;
+            BirhtDate = birhtDate;
+            Disposition = disposition;
         }
         public Pet()
         {
 
         }
 
-        public override string ToString() => this.Name + ": " + this.Disposition;
+        public override string ToString() => Name + ": " + Disposition;
     }
 }

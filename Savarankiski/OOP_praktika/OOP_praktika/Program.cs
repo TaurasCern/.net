@@ -1,4 +1,8 @@
-﻿namespace OOP_praktika
+﻿using OOP_praktika.Models;
+
+
+
+namespace OOP_praktika
 {
     internal class Program
     {
@@ -12,7 +16,7 @@
             Console.WriteLine(country.ToString());
             Console.WriteLine();
 
-            var book = new Book("Knygos pavadinimas", "Knygos aprasas...", new string[] {"aaaa", "bbbb","cccc"});
+            var book = new Book("Knygos pavadinimas", "Knygos aprasas...", new string[] {"aaaa", "bbbb","cccc"}, new List<Review> { new Review("Petras", "a@a.lt", "komentaras")});
             Console.WriteLine(book.ToString());
             Console.WriteLine();
         }

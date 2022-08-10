@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOP_praktika
+namespace OOP_praktika.Models
 {
     internal class City
     {
@@ -14,14 +14,14 @@ namespace OOP_praktika
 
         public City(string name, string[] districts, int population)
         {
-            this.Name = name;
-            this.Districts = districts;
-            this.Population = population;
+            Name = name;
+            Districts = districts;
+            Population = population;
         }
         public City()
         {
 
         }
-        public override string ToString() => this.Name + ", " + this.Population;
+        public override string ToString() => Name + ", " + Population;
     }
 }
