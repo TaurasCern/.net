@@ -8,6 +8,21 @@ namespace OOP_praktika_uz7
 {
     internal class Studentas
     {
-        public List<PazymiuKnygele> Grades { get; set; } = new List<PazymiuKnygele>();
+        public string Name { get; private set; }
+        public PazymiuKnygele GradesBook { get; private set; }
+        public Studentas()
+        {
+
+        }
+        public Studentas(string name, PazymiuKnygele grades)
+        {
+            Name = name;
+            GradesBook = grades;
+        }
+        public void SetGrades(PazymiuKnygele grades)
+        {
+            GradesBook = grades;
+        }
+
     }
 }

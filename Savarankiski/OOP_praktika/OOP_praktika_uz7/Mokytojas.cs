@@ -8,6 +8,16 @@ namespace OOP_praktika_uz7
 {
     internal class Mokytojas
     {
-        public List<Studentas> Students { get; set; } = new List<Studentas>();
+        public string Name { get; private set; }
+        public List<Studentas> Students { get; private set; } = new List<Studentas>();
+        public Mokytojas()
+        {
+
+        }
+        public Mokytojas(string name, List<Studentas> students)
+        {
+            Name = name;
+            Students = students;
+        }
     }
 }
