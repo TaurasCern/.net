@@ -4,7 +4,9 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            EDaysOfWeek today = EDaysOfWeek.Tuesday;
+            int today2 = DayOfWeek.Tuesday;
+            int today3 = DaysOfWeekCustomEnum.Tuesday.ID;
         }
     }
 }
