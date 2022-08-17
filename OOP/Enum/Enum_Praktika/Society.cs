@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Enum_Praktika
 {
-    internal class Society
+    public class Society
     {
         
 
@@ -33,7 +33,7 @@ namespace Enum_Praktika
             {
                 if(person.Gender == EGenderType.FEMALE)
                 {
-                    People.Add(person);
+                    Women.Add(person);
                 }
             }
         }
@@ -53,8 +53,6 @@ namespace Enum_Praktika
                 }
             }
 
-
-            temp = new Person();
             for (int i = 0; i < Women.Count; i++)
             {
                 for (int j = 0; j < Women.Count - 1; j++)
@@ -70,20 +68,39 @@ namespace Enum_Praktika
         }
         public Society SortByFirstName()
         {
+            this._sortState = 1;
+            return this;
+        }
+        public Society SortByLastName()
+        {
+            this._sortState = 2;
             return this;
         }
         public void Asc()
         {
             Person temp = new Person();
+
             for (int i = 0; i < Men.Count; i++)
             {
                 for (int j = 0; j < Men.Count - 1; j++)
                 {
-                    if (Men[j].FirstName.CompareTo(Men[j + 1].FirstName) > 0)
+                    if(this._sortState == 1)
                     {
-                        temp = Men[j + 1];
-                        Men[j + 1] = Men[j];
-                        Men[j] = temp;
+                        if (Men[j].FirstName.CompareTo(Men[j + 1].FirstName) > 0)
+                        {
+                            temp = Men[j + 1];
+                            Men[j + 1] = Men[j];
+                            Men[j] = temp;
+                        }
+                    }
+                    else if(this._sortState == 2)
+                    {
+                        if (Men[j].LastName.CompareTo(Men[j + 1].LastName) > 0)
+                        {
+                            temp = Men[j + 1];
+                            Men[j + 1] = Men[j];
+                            Men[j] = temp;
+                        }
                     }
                 }
             }
@@ -92,12 +109,25 @@ namespace Enum_Praktika
             {
                 for (int j = 0; j < Women.Count - 1; j++)
                 {
-                    if (Women[j].FirstName.CompareTo(Women[j + 1].FirstName) > 0)
+                    if (this._sortState == 1)
                     {
-                        temp = Women[j + 1];
-                        Women[j + 1] = Women[j];
-                        Women[j] = temp;
+                        if (Women[j].FirstName.CompareTo(Women[j + 1].FirstName) > 0)
+                        {
+                            temp = Women[j + 1];
+                            Women[j + 1] = Women[j];
+                            Women[j] = temp;
+                        }
                     }
+                    else if(this._sortState == 2)
+                    {
+                        if (Women[j].LastName.CompareTo(Women[j + 1].LastName) > 0)
+                        {
+                            temp = Women[j + 1];
+                            Women[j + 1] = Women[j];
+                            Women[j] = temp;
+                        }
+                    }
+
                 }
             }
 
@@ -105,11 +135,23 @@ namespace Enum_Praktika
             {
                 for (int j = 0; j < People.Count - 1; j++)
                 {
-                    if (People[j].FirstName.CompareTo(People[j + 1].FirstName) > 0)
+                    if (this._sortState == 1)
                     {
-                        temp = People[j + 1];
-                        People[j + 1] = People[j];
-                        People[j] = temp;
+                        if (People[j].FirstName.CompareTo(People[j + 1].FirstName) > 0)
+                        {
+                            temp = People[j + 1];
+                            People[j + 1] = People[j];
+                            People[j] = temp;
+                        }
+                    }
+                    else if (this._sortState == 2)
+                    {
+                        if (People[j].LastName.CompareTo(People[j + 1].LastName) > 0)
+                        {
+                            temp = People[j + 1];
+                            People[j + 1] = People[j];
+                            People[j] = temp;
+                        }
                     }
                 }
             }
@@ -121,11 +163,23 @@ namespace Enum_Praktika
             {
                 for (int j = 0; j < Men.Count - 1; j++)
                 {
-                    if (Men[j].FirstName.CompareTo(Men[j + 1].FirstName) < 0)
+                    if (this._sortState == 1)
                     {
-                        temp = Men[j + 1];
-                        Men[j + 1] = Men[j];
-                        Men[j] = temp;
+                        if (Men[j].FirstName.CompareTo(Men[j + 1].FirstName) < 0)
+                        {
+                            temp = Men[j + 1];
+                            Men[j + 1] = Men[j];
+                            Men[j] = temp;
+                        }
+                    }
+                    else if (this._sortState == 2)
+                    {
+                        if (Men[j].LastName.CompareTo(Men[j + 1].LastName) < 0)
+                        {
+                            temp = Men[j + 1];
+                            Men[j + 1] = Men[j];
+                            Men[j] = temp;
+                        }
                     }
                 }
             }
@@ -134,20 +188,41 @@ namespace Enum_Praktika
             {
                 for (int j = 0; j < Women.Count - 1; j++)
                 {
-                    if (Women[j].FirstName.CompareTo(Women[j + 1].FirstName) < 0)
+                    if (this._sortState == 1)
                     {
-                        temp = Women[j + 1];
-                        Women[j + 1] = Women[j];
-                        Women[j] = temp;
+                        if (Women[j].FirstName.CompareTo(Women[j + 1].FirstName) < 0)
+                        {
+                            temp = Women[j + 1];
+                            Women[j + 1] = Women[j];
+                            Women[j] = temp;
+                        }
+                    }
+                    else if(this._sortState == 2)
+                    {
+                        if (Women[j].LastName.CompareTo(Women[j + 1].LastName) < 0)
+                        {
+                            temp = Women[j + 1];
+                            Women[j + 1] = Women[j];
+                            Women[j] = temp;
+                        }
                     }
                 }
             }
 
-            for (int i = 0; i < People.Count; i++)
+            for (int j = 0; j < People.Count - 1; j++)
             {
-                for (int j = 0; j < People.Count - 1; j++)
+                if (this._sortState == 1)
                 {
                     if (People[j].FirstName.CompareTo(People[j + 1].FirstName) < 0)
+                    {
+                        temp = People[j + 1];
+                        People[j + 1] = People[j];
+                        People[j] = temp;
+                    }
+                }
+                else if (this._sortState == 2)
+                {
+                    if (People[j].LastName.CompareTo(People[j + 1].LastName) < 0)
                     {
                         temp = People[j + 1];
                         People[j + 1] = People[j];
@@ -157,10 +232,11 @@ namespace Enum_Praktika
             }
         }
 
+       
         public List<Person> People { get; set; }  = new List<Person>();
         public List<Person> Men { get; set; }  = new List<Person>();
         public List<Person> Women { get; set; }  = new List<Person>();
-
+        private int _sortState; // 1 - first name || 2 - last name
         public List<Person> OldPeople
         {
             get

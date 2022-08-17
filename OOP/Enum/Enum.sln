@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enum", "Enum\Enum.csproj", "{FBEDA4F9-94B8-4A23-8CD8-4A5C61E73C5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enum", "Enum\Enum.csproj", "{FBEDA4F9-94B8-4A23-8CD8-4A5C61E73C5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enum_Praktika", "Enum_Praktika\Enum_Praktika.csproj", "{7FCB792D-14CB-4F2E-9C2F-5BF976AA37C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enum_Praktika", "Enum_Praktika\Enum_Praktika.csproj", "{7FCB792D-14CB-4F2E-9C2F-5BF976AA37C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enum_Praktika_Tests", "Enum_Praktika_Tests\Enum_Praktika_Tests.csproj", "{4FD6F401-4710-421B-ADE9-9B8351AB28B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{7FCB792D-14CB-4F2E-9C2F-5BF976AA37C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FCB792D-14CB-4F2E-9C2F-5BF976AA37C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FCB792D-14CB-4F2E-9C2F-5BF976AA37C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FD6F401-4710-421B-ADE9-9B8351AB28B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FD6F401-4710-421B-ADE9-9B8351AB28B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FD6F401-4710-421B-ADE9-9B8351AB28B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FD6F401-4710-421B-ADE9-9B8351AB28B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

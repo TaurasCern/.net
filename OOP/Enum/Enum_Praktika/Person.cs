@@ -43,6 +43,21 @@ namespace Enum_Praktika
         }
         public override string ToString() => $"{FullName}, {Age}, {Gender}";
 
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+
+            var other = obj as Person;
+           
+
+            return this.Id == other.Id
+                    && this.FullName.Equals(other.FullName) 
+                    && this.BirthDate.Equals(other.BirthDate);
+        }
+
         public int Id { get; set; }
         private string _firstName;
         public string FirstName

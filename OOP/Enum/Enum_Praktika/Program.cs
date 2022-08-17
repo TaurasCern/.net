@@ -8,13 +8,10 @@
             people.FillPeople();
             people.FillMen();
             people.SortByFirstName().Asc();
-            //foreach(var oldperson in people.OldPeople)
-            //{
-            //    Console.WriteLine(oldperson.Age);
-            //}
-            foreach(var man in people.Men)
+
+            foreach(var person in people.People)
             {
-                Console.WriteLine(man.FirstName);
+                Console.WriteLine(person.ToString());
             }
         }
     }
