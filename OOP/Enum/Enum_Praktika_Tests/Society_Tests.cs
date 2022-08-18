@@ -29,7 +29,7 @@ namespace Enum_Praktika_Tests
         public void Society_FillMen_Test()
         {
             var fakePeople = new Society();
-            fakePeople.FillMen();
+            fakePeople.FillPeople();
 
             var expected = new List<Person>()
             {
@@ -54,7 +54,7 @@ namespace Enum_Praktika_Tests
         public void Society_FillWomen_Test()
         {
             var fakePeople = new Society();
-            fakePeople.FillWomen();
+            fakePeople.FillPeople();
 
             var expected = new List<Person>()
             {

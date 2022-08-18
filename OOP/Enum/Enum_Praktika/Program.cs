@@ -6,7 +6,6 @@
         {
             var people = new Society();
             people.FillPeople();
-            people.FillMen();
             people.SortByFirstName().Asc();
 
             foreach(var person in people.People)

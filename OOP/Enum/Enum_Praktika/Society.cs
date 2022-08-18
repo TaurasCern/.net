@@ -12,14 +12,18 @@ namespace Enum_Praktika
 
         public void FillPeople()
         {
+            var people = new List<Person>();
             foreach (var person in InitialData.PersonInitialData.DataSeed)
             {
-                People.Add(person);
+                people.Add(person);
             }
+            People = people;
+            FillMen(people);
+            FillWomen(people);
         }        
-        public void FillMen()
+        public void FillMen(List<Person> people)
         {
-            foreach (var person in InitialData.PersonInitialData.DataSeed)
+            foreach (var person in people)
             {
                 if((int)person.Gender == (int)EGenderType.MALE)
                 {
@@ -27,9 +31,9 @@ namespace Enum_Praktika
                 }
             }
         }        
-        public void FillWomen()
+        public void FillWomen(List<Person> people)
         {
-            foreach (var person in InitialData.PersonInitialData.DataSeed)
+            foreach (var person in people)
             {
                 if(person.Gender == EGenderType.FEMALE)
                 {

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32519.379
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataReading", "DataReading\DataReading.csproj", "{5E7AF816-9F55-48F9-A23E-60F7541BEDFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataReading.Domain", "DataReading.Domain\DataReading.Domain.csproj", "{4B0BF795-494F-4F0A-8D0B-9AD3FFCC6DCE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E7AF816-9F55-48F9-A23E-60F7541BEDFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E7AF816-9F55-48F9-A23E-60F7541BEDFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E7AF816-9F55-48F9-A23E-60F7541BEDFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E7AF816-9F55-48F9-A23E-60F7541BEDFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B0BF795-494F-4F0A-8D0B-9AD3FFCC6DCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B0BF795-494F-4F0A-8D0B-9AD3FFCC6DCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B0BF795-494F-4F0A-8D0B-9AD3FFCC6DCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B0BF795-494F-4F0A-8D0B-9AD3FFCC6DCE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FEEE9C91-366E-4119-A39E-8832269FBBA4}
+	EndGlobalSection
+EndGlobal
