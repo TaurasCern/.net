@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataReading", "DataReading\DataReading.csproj", "{5E7AF816-9F55-48F9-A23E-60F7541BEDFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataReading", "DataReading\DataReading.csproj", "{5E7AF816-9F55-48F9-A23E-60F7541BEDFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataReading.Domain", "DataReading.Domain\DataReading.Domain.csproj", "{4B0BF795-494F-4F0A-8D0B-9AD3FFCC6DCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataReading.Domain", "DataReading.Domain\DataReading.Domain.csproj", "{4B0BF795-494F-4F0A-8D0B-9AD3FFCC6DCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataReading_Tests", "DataReading_Tests\DataReading_Tests.csproj", "{CD49B33C-BC2B-4334-9D92-48CCDB1C92BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{4B0BF795-494F-4F0A-8D0B-9AD3FFCC6DCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B0BF795-494F-4F0A-8D0B-9AD3FFCC6DCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B0BF795-494F-4F0A-8D0B-9AD3FFCC6DCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD49B33C-BC2B-4334-9D92-48CCDB1C92BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD49B33C-BC2B-4334-9D92-48CCDB1C92BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD49B33C-BC2B-4334-9D92-48CCDB1C92BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD49B33C-BC2B-4334-9D92-48CCDB1C92BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

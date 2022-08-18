@@ -12,6 +12,7 @@ namespace DataReading.Domain.Models
         {
 
         }
+
         public Hotel(string[] hotelData)
         {
             Id = Convert.ToInt32(hotelData[0]);
@@ -27,11 +28,6 @@ namespace DataReading.Domain.Models
         public int Rating { get; set; }
         public int StreetNumber { get; set; }
         public DateTime CreationDate { get; set; }
-        public void AddUser(User user)
-        {
-            Tenants.Add(user);
-        }
-
         public double AverageClientSalary
         {
             get
@@ -44,6 +40,58 @@ namespace DataReading.Domain.Models
 
                 return avgSalary / Tenants.Count;
             }
+        }
+        public List<User> MenVisitors 
+        {
+            get
+            {
+                List<User> menVisitors = new List<User>();
+                foreach(var visitor in Tenants)
+                {
+                    if(visitor.Gender == Enums.EGender.Male)
+                    {
+                        menVisitors.Add(visitor);
+                    }
+                }
+                return menVisitors;
+            }
+        }
+        public List<User> WomenVisitors
+        {
+            get
+            {
+                List<User> womenVisitors = new List<User>();
+                foreach (var visitor in Tenants)
+                {
+                    if (visitor.Gender == Enums.EGender.Female)
+                    {
+                        womenVisitors.Add(visitor);
+                    }
+                }
+                return womenVisitors;
+            }
+        }
+        public void AddUser(User user)
+        {
+            Tenants.Add(user);
+        }
+        public void AddUsers(List<User> users)
+        {
+            foreach (var user in users)
+            {
+                Tenants.Add(user);
+            }         
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || !(obj is Hotel)) return false;
+
+            var other = obj as Hotel;
+
+            return Id == other.Id
+                && Name.Equals(other.Name)
+                && StreetNumber == other.StreetNumber
+                && CreationDate.Equals(other.CreationDate);
         }
     }
 }

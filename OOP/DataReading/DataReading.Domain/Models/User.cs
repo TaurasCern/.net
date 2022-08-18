@@ -9,6 +9,11 @@ namespace DataReading.Domain.Models
 {
     public class User
     {
+        public User()
+        {
+
+        }
+
         public User(string[] userData)
         {
             Id = Convert.ToInt32(userData[0]);
@@ -39,5 +44,19 @@ namespace DataReading.Domain.Models
 
 
         public override string ToString() => $"{Id}. {FirstName} {LastName} ({Gender}) - {Email}";
+
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || !(obj is User)) return false;
+
+            var other = obj as User;
+
+            return Id == other.Id 
+                && FirstName.Equals(other.FirstName)
+                && LastName.Equals(other.LastName)
+                && Email.Equals(other.Email)
+                && Salary == other.Salary
+                && BirthDate.Equals(other.BirthDate);
+        }
     }
 }
