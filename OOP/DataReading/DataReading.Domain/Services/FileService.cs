@@ -70,17 +70,19 @@ namespace DataReading.Domain.Services
             using StreamReader sr = new StreamReader(_filePath);
 
             string userLine;
+
             sr.ReadLine();
 
             while ((userLine = sr.ReadLine()) != null)
             {
+                
                 string[] hotelData = userLine.Split(",");
                 if (hotelData.Length != userCollumnCount) break;
 
                 Hotel newHotel = new Hotel(hotelData);
+
                 hotels.Add(newHotel);
             }
-
             return hotels;
         }
     }

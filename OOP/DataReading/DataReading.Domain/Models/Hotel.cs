@@ -14,7 +14,6 @@ namespace DataReading.Domain.Models
         }
         public Hotel(string[] hotelData)
         {
-            Console.WriteLine(String.Join(",", hotelData));
             Id = Convert.ToInt32(hotelData[0]);
             Name = hotelData[1];
             Rating = Convert.ToInt32(hotelData[2]);

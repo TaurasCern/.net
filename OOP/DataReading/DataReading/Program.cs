@@ -11,10 +11,12 @@ namespace DataReading
             FileService hotelFileService = new FileService(Environment.CurrentDirectory + "\\InitialData\\HotelData1.csv");
             
             var users = userFileService.FetchUserCsvRecords();
+
             var manager = new HotelManager(hotelFileService.FetchHotelCsvRecords());
+
             manager.AllocateUsersToHotels(users);
 
-            //PrintHotelTenantAverageSalary(manager);
+            PrintHotelTenantAverageSalary(manager);
         }
         public static void PrintAllBasicUsers(List<BasicUser> basicUsers)
         {
