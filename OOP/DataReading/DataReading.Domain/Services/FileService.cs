@@ -63,21 +63,21 @@ namespace DataReading.Domain.Services
 
         public List<Hotel> FetchHotelCsvRecords()
         {
-            int userCollumnCount = 5;
+            int hotelCollumnCount = 5;
 
             List<Hotel> hotels = new List<Hotel>();
 
             using StreamReader sr = new StreamReader(_filePath);
 
-            string userLine;
+            string hotelLine;
 
             sr.ReadLine();
 
-            while ((userLine = sr.ReadLine()) != null)
+            while ((hotelLine = sr.ReadLine()) != null)
             {
                 
-                string[] hotelData = userLine.Split(",");
-                if (hotelData.Length != userCollumnCount) break;
+                string[] hotelData = hotelLine.Split(",");
+                if (hotelData.Length != hotelCollumnCount) break;
 
                 Hotel newHotel = new Hotel(hotelData);
 
