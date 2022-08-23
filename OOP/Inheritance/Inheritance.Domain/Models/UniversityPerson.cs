@@ -10,99 +10,91 @@ namespace Inheritance.Domain.Models
     {
         public UniversityPerson()
         {
-
+            _random = new Random();
         }
 
-        public Profession Profession { get; set; }
+        public virtual Profession Profession { get; set; }
         public List<Hobby> Hobbies { get; set; } = new List<Hobby>();
+        private Random _random;
         public void AssignHobbiesRandomly()
         {
             var hobbies = Inheritance.Domain.InitialData.HobbyInitialData.DataSeedCsv.ToList();
-            Random random = new Random();
+            List<int> indexesTaken = new List<int>();
 
-            for (int i = 0; i < random.Next(4); i++)
+            for (int i = 0; i < _random.Next(4); i++)
             {
                 var hobby = new Hobby();
-                var randomIndex = random.Next(hobbies.Count);
+
+                int randomIndex;
+
+                do
+                {
+                    randomIndex = _random.Next(hobbies.Count);
+                }
+                while (indexesTaken.Contains(randomIndex));
+                {
+                    randomIndex = _random.Next(hobbies.Count);
+                }
+
+                indexesTaken.Add(randomIndex);
 
                 hobby.EncodeCsv(hobbies[randomIndex]);
+
                 hobbies.RemoveAt(randomIndex);
+
                 Hobbies.Add(hobby);
             }
         }
         public void AssignHobbiesRandomly(Random random)
         {
-            var hobbies = Inheritance.Domain.InitialData.HobbyInitialData.DataSeedCsv.ToList();
+            _random = random;
 
-            for (int i = 0; i < random.Next(4); i++)
-            {
-                var hobby = new Hobby();
-                var randomIndex = random.Next(hobbies.Count);
-
-                hobby.EncodeCsv(hobbies[randomIndex]);
-                hobbies.RemoveAt(randomIndex);
-                Hobbies.Add(hobby);
-            }
+            AssignHobbiesRandomly();
         }
         public void PickProfessionRandomly()
         {
-            var random = new Random();
-            var choice = random.Next(3);
+            var choice = _random.Next(3);
 
-            if(choice == 1)
+            if(choice == 0)
             {
-                var randomProfession = InitialData.ProfessionInitialData.DataSeed[random.Next(InitialData.ProfessionInitialData.DataSeed.Length)];
-
-                Profession = randomProfession;
+                SetProfession(InitialData.ProfessionInitialData
+                    .DataSeed[_random.Next(InitialData.ProfessionInitialData.DataSeed.Length)]);
+            }     
+            else if (choice == 1)
+            {
+                SetProfession(InitialData.ProfessionInitialData
+                    .DataSeedCsvComma[_random.Next(InitialData.ProfessionInitialData.DataSeedCsvComma.Length)].Split(","));
             }
-        
             else if (choice == 2)
             {
-                var randomProfession = InitialData.ProfessionInitialData.DataSeedCsvComma[InitialData.ProfessionInitialData.DataSeedCsvComma.Length];
-
-                Profession = new Profession(randomProfession.Split(","));
-            }
-            else if (choice == 3)
-            {
-                var randomProfession = InitialData.ProfessionInitialData.DataSeedCsvComma[InitialData.ProfessionInitialData.DataSeedCsvComma.Length];
-
-                Profession = new Profession(randomProfession.Split(";"));
+                SetProfession(InitialData.ProfessionInitialData
+                    .DataSeedCsvSemicolon[_random.Next(InitialData.ProfessionInitialData.DataSeedCsvComma.Length)].Split(";"));
             }
         }
-        public void PickProfessionRandomly(Random random)
+        public void SetProfession(string[] data)
         {
-            var choice = random.Next(3);
+            Profession.Id = Convert.ToInt32(data[0]);
+            Profession.Text = data[1];
+            Profession.TextLt = data[2];
 
-            if (choice == 1)
-            {
-                var randomProfession = InitialData.ProfessionInitialData.DataSeed[random.Next(InitialData.ProfessionInitialData.DataSeed.Length)];
-
-                Profession = randomProfession;
-            }
-
-            else if (choice == 2)
-            {
-                var randomProfession = InitialData.ProfessionInitialData.DataSeedCsvComma[InitialData.ProfessionInitialData.DataSeedCsvComma.Length];
-
-                Profession = new Profession(randomProfession.Split(","));
-            }
-            else if (choice == 3)
-            {
-                var randomProfession = InitialData.ProfessionInitialData.DataSeedCsvComma[InitialData.ProfessionInitialData.DataSeedCsvComma.Length];
-
-                Profession = new Profession(randomProfession.Split(";"));
-            }
         }
-        public string GetCSV()
+        public void SetProfession(Profession profession)
         {
-            var text = new StringBuilder(Profession.GetCsv());
+            Profession.Id = profession.Id;
+            Profession.Text = profession.Text;
+            Profession.TextLt = profession.TextLt;
+
+        }
+        public virtual string GetCsv()
+        {
+            StringBuilder sb = new StringBuilder(String.Join(",", GetPersonCsv(), Profession.GetCsv()));
 
             foreach(var hobby in Hobbies)
             {
-                text.Append($",{hobby.GetCsv()}");
+                sb.Append(",").Append(hobby.GetCsv());
             }
 
-            return text.ToString();
+            return sb.ToString();
         }
     }
 }

@@ -22,9 +22,23 @@ namespace Inheritance.Domain.Models
             Text = parts[1];
             TextLt = parts[2];
         }
+        
         public int Id { get; set; }
         public string Text { get; set; }
         public string TextLt { get; set; }
         public string GetCsv() => String.Join(",", Id, Text, TextLt);
+        public void EncodeCsv(string line)
+        {
+            int validCount = 3;
+
+            var parts = line.Split(",");
+
+            if (parts.Length != validCount) { return; }
+            if (!int.TryParse(parts[0], out int id)) { return; }
+
+            Id = id;
+            Text = parts[1];
+            TextLt = parts[2];
+        }
     }
 }

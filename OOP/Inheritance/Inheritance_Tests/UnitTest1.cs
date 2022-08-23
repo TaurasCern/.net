@@ -17,7 +17,7 @@ namespace Inheritance_Tests
             Assert.AreEqual(expected, actual);
         }
         [TestMethod]
-        public void UniversityPerson_PickProfessionRandomly_Test()
+        public void UniversityPerson_AssignHobbiesRandomly_Test()
         {
             var fakeUniversityPerson = new UniversityPerson();
             fakeUniversityPerson.Profession = new Profession("1;Accountant;Buhalteris".Split(";"));
@@ -33,15 +33,21 @@ namespace Inheritance_Tests
         [TestMethod]
         public void UniversityPerson_GetCsv_Test()
         {
-            var fakeUniversityPerson = new UniversityPerson();
-            fakeUniversityPerson.Profession = new Profession("1;Accountant;Buhalteris".Split(";"));
-            fakeUniversityPerson.Hobbies = new List<Hobby>()
-            {
-                new Hobby() { Id = 1, Text = "Astrology", TextLt = "Astrologija"}
+            var fakeUniversityPerson = new UniversityPerson() 
+            { 
+                Id = 1,
+                FirstName = "Vardas",
+                LastName = "Pavarde",
+                Gender = Inheritance.Domain.Enums.EGenderType.MALE,
+                BirthDate = new DateTime(2000,1,1),
+                Height = 170,
+                Weight = 70
             };
 
-            var expected = "1,Accountant,Buhalteris,1,Astrology,Astrologija";
-            var actual = fakeUniversityPerson.GetCSV();
+            fakeUniversityPerson.Profession = new Profession("1;Accountant;Buhalteris".Split(";"));
+
+            var expected = "1,Vardas,Pavarde,MALE,1/1/2000 12:00:00 AM,170,70,1,Accountant,Buhalteris";
+            var actual = fakeUniversityPerson.GetCsv();
 
             Assert.AreEqual(expected, actual);
         }

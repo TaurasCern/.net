@@ -58,6 +58,7 @@ namespace Inheritance.Domain.Models
                     && this.FullName.Equals(other.FullName) 
                     && this.BirthDate.Equals(other.BirthDate);
         }
+        public string GetPersonCsv() => String.Join(",", Id, FirstName, LastName, Gender, BirthDate, Height, Weight);
 
         public int Id { get; set; }
         private string _firstName;
