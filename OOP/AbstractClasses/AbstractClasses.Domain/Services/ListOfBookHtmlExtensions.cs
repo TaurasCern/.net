@@ -1,10 +1,11 @@
-﻿using System;
+﻿using AbstractClasses.Domain.Models.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AbstractClasses.Domain.Models.Concrete
+namespace AbstractClasses.Domain.Services
 {
     public static class ListOfBookHtmlExtensions
     {

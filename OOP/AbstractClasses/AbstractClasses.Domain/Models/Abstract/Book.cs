@@ -1,4 +1,8 @@
-﻿namespace AbstractClasses.Domain.Models.Abstract
+﻿using AbstractClasses.Domain.Enums;
+using AbstractClasses.Domain.Interfaces;
+using AbstractClasses.Domain.Models.Concrete;
+
+namespace AbstractClasses.Domain.Models.Abstract
 {
     public abstract class Book
     {
@@ -19,6 +23,6 @@
         public int BooksSold { get; set; }
         public int? Quantity { get; set; }
         public double? Price { get; set; }
-        public string Type { get; } 
+        public string Type { get; }
     }
 }
