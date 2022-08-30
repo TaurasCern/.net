@@ -23,61 +23,106 @@ namespace AbstractClasses.Domain.Services
                 { EBookType.HardcoverBook, new List<Book>() }
             };
 
-            int index = 21;
-
+            int index = 21; // html line index
             string[] lines = dataSeed.Split(Environment.NewLine);
+
             while(lines.Length > index + 5)
             {
-                    var genre = lines[index].Split("<td>")[1].Split("</td>")[0];
-                    var title = lines[index + 1].Split("<td>")[1].Split("</td>")[0];
-                    var author = lines[index + 2].Split("<td>")[1].Split("</td>")[0];
+                var genre = TrimCell(lines[index]);
+                var title = TrimCell(lines[index + 1]);
+                var author = TrimCell(lines[index + 2]);
+                var booksSold = ParseBooksSold(TrimCell(lines[index + 3]));
+                int? quantity = ParseQuantity(TrimCell(lines[index + 4]));
 
-                    var booksSoldText = lines[index + 3].Split("<td>")[1].Split("</td>")[0];
-                    var booksSold = 0;
-                    if (booksSoldText.ToLower().Contains("million"))
-                    {
-                        booksSold = Convert.ToInt32(booksSoldText.Split(" ")[0]) * 1000000;
-                    }
-                    else if (booksSoldText.ToLower().Contains("billion"))
-                    {
-                        booksSold = Convert.ToInt32(Convert.ToDouble(booksSoldText.Split(" ")[0]) * 1000000000);
-                    }
+                books[EBookType.EBook].Add(new EBook(genre, title, author, booksSold, quantity, 
+                    GetPrice(TrimCell(lines[index + 5]))));
 
-                    var quantityText = lines[index + 4].Split("<td>")[1].Split("</td>")[0];
-                    int? quantity = null;
-                    if (!quantityText.Equals("-"))
-                    {
-                        quantity = Convert.ToInt32(quantityText);
-                    }
+                books[EBookType.AudioBook].Add(new AudioBook(genre, title, author, booksSold, quantity, 
+                    GetPrice(TrimCell(lines[index + 6]))));
 
-                    string priceText1 = lines[index + 5].Replace(" ", "" ).Split("<td>")[1].Split("</td>")[0];
-                    string priceText2 = lines[index + 6].Replace(" ", "" ).Split("<td>")[1].Split("</td>")[0];
-                    string priceText3 = lines[index + 7].Replace(" ", "" ).Split("<td>")[1].Split("</td>")[0];
-                    string priceText4 = lines[index + 8].Replace(" ", "" ).Split("<td>")[1].Split("</td>")[0];
+                books[EBookType.HardcoverBook].Add(new HardcoverBook(genre, title, author, booksSold, quantity, 
+                    GetPrice(TrimCell(lines[index + 7]))));
 
-                    books[EBookType.EBook].Add(new EBook(genre, title, author, booksSold, quantity, GetPrice(priceText1)));
-                    books[EBookType.AudioBook].Add(new AudioBook(genre, title, author, booksSold, quantity, GetPrice(priceText2)));
-                    books[EBookType.HardcoverBook].Add(new HardcoverBook(genre, title, author, booksSold, quantity, GetPrice(priceText3)));
-                    books[EBookType.PaperbackBook].Add(new PaperbackBook(genre, title, author, booksSold, quantity, GetPrice(priceText4)));
+                books[EBookType.PaperbackBook].Add(new PaperbackBook(genre, title, author, booksSold, quantity, 
+                    GetPrice(TrimCell(lines[index + 8]))));
 
-                    index = index + 11;                               
+                index = index + 11;   // next row in html table                            
             }
 
             return books;
         }
 
-        public string Encode(Dictionary<EBookType, List<Book>> book)
+        public string Encode(List<Book> books)
         {
-            throw new NotImplementedException();
+            var booksHtml = new List<BookHtml>();
+            bool flag = false;
+
+            foreach (var book in books)
+            {
+                if (booksHtml.Count == 0)
+                {
+                    booksHtml.Add(new BookHtml(book));
+                    continue;
+                }
+                for (int i = 0; i < booksHtml.Count; i++)
+                {
+                    if (booksHtml[i].Title.Equals(book.Title))
+                    {                                          
+                        booksHtml[i].SetPrice(book.Price, book.Type);
+                    }
+                    else if (!ContainsTitle(booksHtml, book.Title))
+                    {
+                        flag = true;
+                    }
+                }
+                if (flag) 
+                { 
+                    booksHtml.Add(new BookHtml(book) { PriceCount = 1}); 
+                    flag = false;                 
+                }               
+            }
+
+            return booksHtml.ToHtml();
         }
+        private bool ContainsTitle(List<BookHtml> books, string title)
+        {
+            foreach(var book in books)
+            {
+                if (book.Title.Equals(title))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        private string TrimCell(string text) => text.Trim().Replace("<td>", "").Replace("</td>", "");
+        private int? ParseQuantity(string text)
+        {
+            if (!text.Equals("-"))
+            {
+                return Convert.ToInt32(text);
+            }
+            return null;
+        }
+        private int ParseBooksSold(string text)
+        {
+            if (text.ToLower().Contains("million"))
+            {
+                return Convert.ToInt32(text.ToLower().Replace("million", "")) * 1000000;
+            }
+            else if (text.ToLower().Contains("billion"))
+            {
+                return Convert.ToInt32(Convert.ToDouble(text.ToLower().Replace("billion", "")) * 1000000000);
+            }
 
-
+            return Convert.ToInt32(text);
+        }
         private double? GetPrice(string priceText)
         {          
-            if(priceText.Contains("EUR")) { return Convert.ToDouble(priceText.Split("EUR")[0]); }
-            if(priceText.Contains("$")) { return Convert.ToDouble(priceText.Replace("$", "")[0].ToString()) * 1; }
-            if(priceText.Contains("PLN")) { return Convert.ToDouble(priceText.Split("PLN")[0]) * 0.21; }
-
+            if(priceText.Contains("EUR")) { return Convert.ToDouble(priceText.Replace("EUR", "")); }
+            if(priceText.Contains("$")) { return Convert.ToDouble(priceText.Replace("$", "")) * 1; }
+            if(priceText.Contains("PLN")) { return Convert.ToDouble(priceText.Replace("PLN", "")) * 0.21; }
+            
             return null;
         }
     }

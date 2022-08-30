@@ -2,7 +2,7 @@
 {
     public abstract class Book
     {
-        public Book(string genre, string title, string author, int booksSold, int? quantity, double? price)
+        public Book(string genre, string title, string author, int booksSold, int? quantity, double? price, string type)
         {
             Genre = genre;
             Title = title;
@@ -10,6 +10,7 @@
             BooksSold = booksSold;
             Quantity = quantity;
             Price = price;
+            Type = type;
         }
 
         public string Genre { get; set; }
@@ -18,6 +19,6 @@
         public int BooksSold { get; set; }
         public int? Quantity { get; set; }
         public double? Price { get; set; }
-
+        public string Type { get; } 
     }
 }

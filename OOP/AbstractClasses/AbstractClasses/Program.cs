@@ -13,13 +13,21 @@ namespace AbstractClasses
 
             Dictionary<EBookType, List<Book>> dictionary = bookService.Decode(BookInitialData.DataSeedHtml);
 
-            foreach(KeyValuePair<EBookType, List<Book>> type in dictionary)
-            {
-                foreach(var book in type.Value)
-                {
-                    Console.WriteLine(book.Title);
-                }
-            }
+            List<Book> books = new List<Book>();
+            books.AddRange(dictionary[EBookType.EBook]);
+            books.AddRange(dictionary[EBookType.AudioBook]);
+            books.AddRange(dictionary[EBookType.HardcoverBook]);
+            books.AddRange(dictionary[EBookType.PaperbackBook]);
+
+            Console.WriteLine(bookService.Encode(books));
+
+            //foreach(KeyValuePair<EBookType, List<Book>> type in dictionary)
+            //{
+            //    foreach(var book in type.Value)
+            //    {
+            //        Console.WriteLine(book.Type);
+            //    }
+            //}
         }
     }
 }

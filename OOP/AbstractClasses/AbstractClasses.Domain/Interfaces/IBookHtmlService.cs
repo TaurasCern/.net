@@ -11,6 +11,6 @@ namespace AbstractClasses.Domain.Interfaces
     public interface IBookHtmlService
     {
         Dictionary<EBookType, List<Book>> Decode(string dataSeed);
-        string Encode(Dictionary<EBookType, List<Book>> book);
+        string Encode(List<Book> book);
     }
 }

@@ -9,7 +9,7 @@ namespace AbstractClasses.Domain.Models.Concrete
 {
     public class HardcoverBook : Book
     {
-        public HardcoverBook(string genre, string title, string author, int booksSold, int? quantity, double? price) : base(genre, title, author, booksSold, quantity, price)
+        public HardcoverBook(string genre, string title, string author, int booksSold, int? quantity, double? price) : base(genre, title, author, booksSold, quantity, price, nameof(HardcoverBook))
         {
         }
     }
