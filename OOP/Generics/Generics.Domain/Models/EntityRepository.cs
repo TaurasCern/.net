@@ -6,28 +6,29 @@ using System.Threading.Tasks;
 
 namespace Generics
 {
-    public class EntityRepository<T> where T : IUser, new()
+    public class EntityRepository<T> : IRepository<T> where T : IUser
     {
         public EntityRepository()
         {
 
         }
-        public List<T> Entities { get; set; }
-        void Add(T entity)
+        private List<T> _entities = new List<T>();
+        public void Add(T entity)
         {
-            Entities.Add(entity);
+            _entities.Add(entity);
         }
-        void Remove(T entity)
+        public void Remove(T entity)
         {
-            Entities.Remove(entity);
+            _entities.Remove(entity);
         }
-        void Print()
+        public void Print()
         {
-            foreach(var entity in Entities)
+            foreach(var entity in _entities)
             {
                 Console.WriteLine($"{entity.Id}, {entity.Name}");
             }
         }
-        T Fetch(int index) => Entities[index];
+        public List<T> Fetch() => _entities;
+        public T Fetch(int id) => _entities.Where(e => e.Id == id).FirstOrDefault();
     }
 }
