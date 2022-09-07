@@ -83,7 +83,7 @@ namespace TowerOfHanoi.Domain.Models
             return locations;
         }
         public bool IsWon(int collumn = 2) => Board[collumn].Count == 4;
-
+        public bool IsPlaceable(int collumn) => Board[collumn].Count == 0 ? true : Board[collumn][Board[collumn].Count - 1].Size > PickedUpDisk.Size;
 
     }
 }

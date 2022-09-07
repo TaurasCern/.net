@@ -14,13 +14,13 @@ namespace TowerOfHanoi.Domain.Services
         {
             _game = game;
             _consoleService = new ConsoleService(_game);
+            _logService = new LogService(_game);
         }
         private Game _game;
         private IConsole _consoleService;
+        private ILogable _logService;
         public void GameStateMachine()
         {
-            ILogable logService = new LogService(_game);
-
             while (!_game.IsWon())
             {
                 _consoleService.PrintGameBoard();
@@ -33,26 +33,29 @@ namespace TowerOfHanoi.Domain.Services
                     // ai
                     // log
                 }
-                else if(choice.KeyChar - 48 == 1|| choice.KeyChar - 48 == 2 || choice.KeyChar - 48 == 3)
+                else if((choice.KeyChar - 48 == 1|| choice.KeyChar - 48 == 2 || choice.KeyChar - 48 == 3) && !_game.IsPickedUp)
                 {
-                    TowerChoice(_game, choice.KeyChar - 48);
-                    _consoleService.PrintGameBoard();
-                    if (!_game.IsPickedUp) { logService.Log(); }                   
+                    DiskPickupChoice(choice.KeyChar - 48);                
+                }
+                else if((choice.KeyChar - 48 == 1 || choice.KeyChar - 48 == 2 || choice.KeyChar - 48 == 3)
+                    && _game.IsPickedUp && _game.IsPlaceable(choice.KeyChar - 49))
+                {
+                    DiskPlaceChoice(choice.KeyChar - 48);
                 }
             }
+            _consoleService.PrintGameBoard();
             Console.WriteLine("win");
         }
-        public void TowerChoice(Game game, int choice)
+        private void DiskPickupChoice(int choice)
         {
-            if (!game.IsPickedUp)
-            {
-                if (game.Board[choice - 1].Count == 0) { return; }
-                game.PickUp(choice - 1);
-                _consoleService.PrintGameBoard();
-            }          
-            var placeChoice = ValidIntInput();
-            game.Place(placeChoice - 1); 
-            
+            if (_game.Board[choice - 1].Count == 0) { return; }
+            _game.PickUp(choice - 1);
+            _consoleService.PrintGameBoard();               
+        }
+        private void DiskPlaceChoice(int choice)
+        {
+            _game.Place(choice - 1);
+            _logService.Log();
         }
         public int ValidIntInput()
         {
