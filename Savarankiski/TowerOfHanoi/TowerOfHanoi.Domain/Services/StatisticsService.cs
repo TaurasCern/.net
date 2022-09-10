@@ -56,9 +56,9 @@ namespace TowerOfHanoi.Domain.Services
         private StringBuilder Header()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(String.Format("---------------------------------------------------------------{0}", Environment.NewLine));
-            sb.Append(String.Format("| {0,-20} | {1,-26} | Pokytis |{2,26}", "Žaidimo data", IsUntilWin ? "Ėjimų kiekis iki laimėjimo" : "Perteklinių ėjimų kiekis", Environment.NewLine));
-            sb.Append(String.Format("---------------------------------------------------------------{0}", Environment.NewLine));
+            sb.Append(String.Format("----------------------------------------------------------------{0}", Environment.NewLine));
+            sb.Append(String.Format("| {0,-21} | {1,-26} | Pokytis |{2,26}", "Žaidimo data", IsUntilWin ? "Ėjimų kiekis iki laimėjimo" : "Perteklinių ėjimų kiekis", Environment.NewLine));
+            sb.Append(String.Format("----------------------------------------------------------------{0}", Environment.NewLine));
 
             return sb;
         }
@@ -66,16 +66,16 @@ namespace TowerOfHanoi.Domain.Services
         {
             if (sb.ToString().Split(Environment.NewLine).Length < 4)
             {
-                sb.Append(String.Format("| {0,-20} | {1,-26} | {2,-7} |{3}", log.GameStartTime, FormatWinCell(log), "N/G", Environment.NewLine));
-                sb.Append($"---------------------------------------------------------------{Environment.NewLine}");
+                sb.Append(String.Format("| {0,-21} | {1,-26} | {2,-7} |{3}", log.GameStartTime, FormatWinCell(log), "N/G", Environment.NewLine));
+                sb.Append($"----------------------------------------------------------------{Environment.NewLine}");
             }
             else
             {
-                sb.Append(String.Format("| {0,-20} | {1,-26} | {2,-7} |{3}",
+                sb.Append(String.Format("| {0,-21} | {1,-26} | {2,-7} |{3}",
                     log.GameStartTime, FormatWinCell(log),
                     _previousLog.IsWon && log.IsWon ? log.Move - _previousLog.Move : "N/G",
                     Environment.NewLine));
-                sb.Append($"---------------------------------------------------------------{Environment.NewLine}");
+                sb.Append($"----------------------------------------------------------------{Environment.NewLine}");
 
             }
 

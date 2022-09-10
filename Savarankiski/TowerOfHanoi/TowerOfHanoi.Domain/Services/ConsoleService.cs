@@ -10,9 +10,9 @@ namespace TowerOfHanoi.Domain.Services
 {
     public class ConsoleService : IConsole
     {
-        private Game _game;
+        private IGame _game;
 
-        public ConsoleService(Game game)
+        public ConsoleService(IGame game)
         {
             _game = game;
         }

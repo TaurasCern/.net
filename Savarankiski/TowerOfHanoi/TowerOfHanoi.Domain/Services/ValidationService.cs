@@ -10,11 +10,11 @@ namespace TowerOfHanoi.Domain.Services
 {
     public class ValidationService : IValidatable
     {
-        public ValidationService(Game game)
+        public ValidationService(IGame game)
         {
             _game = game;
         }
-        private Game _game;
+        private IGame _game;
         public bool IsValidPickUp(ConsoleKeyInfo choice) => !_game.IsPickedUp && !(_game.Board[choice.KeyChar - 49].Count == 0);
         public bool IsValidPlace(ConsoleKeyInfo choice) => _game.IsPickedUp && _game.IsPlaceable(choice.KeyChar - 49);
     }

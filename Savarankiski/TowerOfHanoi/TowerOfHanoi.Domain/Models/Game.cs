@@ -53,12 +53,9 @@ namespace TowerOfHanoi.Domain.Models
             List<int> locations = new List<int>();
             List<Disk> disks = new List<Disk>();
 
-            foreach(var collumn in Board)
+            foreach(var collumn in Board.Values)
             {
-                foreach(var disk in collumn.Value)
-                {
-                    disks.Add((Disk)disk.Clone());
-                }
+                disks.AddRange(collumn);
             }
             disks.Sort((x, y) => x.Size.CompareTo(y.Size));
 

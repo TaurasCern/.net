@@ -10,5 +10,9 @@ namespace TowerOfHanoi.Domain.Interfaces
     public interface ILogable
     {
         void Log();
+        void SetConfig();
+        string FormatCsvLog();
+        string FormatHtmlLog();
+        string FormatTxtLog();
     }
 }

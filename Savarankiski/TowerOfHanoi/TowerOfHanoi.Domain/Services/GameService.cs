@@ -15,10 +15,10 @@ namespace TowerOfHanoi.Domain.Services
             _game = game;
             _consoleService = new ConsoleService(_game);
             _validationService = new ValidationService(_game);
-            _logService = new LogService(_game);
+            
             _statisticsService = new StatisticsService();
         }
-        private Game _game;
+        private IGame _game;
         private IConsole _consoleService;
         private IValidatable _validationService;
         private ILogable _logService;
@@ -26,6 +26,10 @@ namespace TowerOfHanoi.Domain.Services
 
         public void GameStateMachine()
         {
+            _logService = new LogService(_game, DateTime.Now);
+            _logService.SetConfig();
+
+
             while (!_game.IsWon())
             {
                 _consoleService.PrintGameBoard();
@@ -46,6 +50,7 @@ namespace TowerOfHanoi.Domain.Services
             }
             _consoleService.PrintGameBoard();
             Console.WriteLine("win");
+            Console.WriteLine(_statisticsService.CreateStatistics());
         }
         private void DiskPickupChoice(int choice)
         {
