@@ -33,34 +33,20 @@ namespace TowerOfHanoi.Domain.Models
         public int CurrentCollumn { get; set; }
         public void PickUp(int collumn)
         {
-            if (Board[collumn].Count == 0) { return; }
-
             PickedUpDisk = (Disk)Board[collumn][Board[collumn].Count - 1].Clone();
             Board[collumn].RemoveAt(Board[collumn].Count - 1);
             PreviousCollumn = collumn;
-            //log
         }
         public void Place(int collumn)
         {
-            if (Board[collumn].Count == 0)
-            {
-                PickedUpDisk.Location = collumn;
-                Board[collumn].Add((Disk)PickedUpDisk.Clone());
-                PickedUpDisk = null;
-                CurrentCollumn = collumn;
-                Moves++;
-                //log
-            }
-            else if(Board[collumn].Count > 0)
-            {
-                if (Board[collumn][Board[collumn].Count - 1].Size < PickedUpDisk.Size) { return; }
-                PickedUpDisk.Location = collumn;
-                Board[collumn].Add((Disk)PickedUpDisk.Clone());
-                PickedUpDisk = null;
-                CurrentCollumn = collumn;
-                Moves++;
-                //log
-            }
+            if (!IsPlaceable(collumn)) { return; }
+
+            PickedUpDisk.Location = collumn;
+            Board[collumn].Add((Disk)PickedUpDisk.Clone());
+            PickedUpDisk = null;
+            CurrentCollumn = collumn;
+            Moves++;
+            
         }
         public List<int> GetLocations()
         {

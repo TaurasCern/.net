@@ -11,5 +11,8 @@ namespace TowerOfHanoi.Domain.Enums
         pirmo = 1,
         antro = 2,
         trecio = 3,
+        pirma = 11,
+        antra = 12,
+        trecia = 13,
     }
 }

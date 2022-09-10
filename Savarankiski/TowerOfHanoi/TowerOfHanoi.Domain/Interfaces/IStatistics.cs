@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TowerOfHanoi.Domain.Models;
 
 namespace TowerOfHanoi.Domain.Interfaces
 {
-    public interface IInputService
+    public interface IStatistics
     {
-        void GameStateMachine();
+        public bool IsUntilWin { get; set; }
+        string CreateStatistics();
     }
 }

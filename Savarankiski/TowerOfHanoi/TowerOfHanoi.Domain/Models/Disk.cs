@@ -12,11 +12,6 @@ namespace TowerOfHanoi.Domain.Models
         {
 
         }
-        public Disk(Disk disk)
-        {
-            Size = disk.Size;
-            Location = disk.Location;
-        }
         public Disk(int size, int location)
         {
             Size = size;

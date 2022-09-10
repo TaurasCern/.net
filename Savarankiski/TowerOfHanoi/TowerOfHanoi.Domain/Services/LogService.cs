@@ -13,9 +13,9 @@ namespace TowerOfHanoi.Domain.Services
     {
         public LogService(Game game)
         {
-            Game = game;
+            _game = game;
             using StreamReader sr = new StreamReader(_configPath);
-            string configLine;
+            string configLine;       
             while ((configLine = sr.ReadLine()) != null)
             {
                 string[] config = configLine.Split(":");
@@ -25,8 +25,9 @@ namespace TowerOfHanoi.Domain.Services
                 else if (config[0] == "csv" && config[1] == "true") { _logCsv = true; }
             }
             sr.Close();
+            if (!_logCsv && !_logHtml && !_logTxt) { NoConfig(); }
         }
-        private Game Game;
+        private Game _game;
         private bool _logCsv = false;
         private bool _logHtml = false;
         private bool _logTxt = false;
@@ -35,25 +36,25 @@ namespace TowerOfHanoi.Domain.Services
         private readonly string _logDirectory = $"{Environment.CurrentDirectory}\\Logs\\";
         public void Log()
         {
-            if(_gameStartTime == null) { _gameStartTime = DateTime.Now; }
-            if (_logTxt){ LogTxt(); }
+            if (_gameStartTime == null) { _gameStartTime = DateTime.Now; }
+            if (_logTxt) { LogTxt(); }
             if (_logHtml){ LogHtml(); }
             if (_logCsv) { LogCsv(); }
         }
         private void LogTxt() 
         {
             using StreamWriter sw = new StreamWriter($"{_logDirectory}{((DateTime)_gameStartTime).ToFileTime()}.txt", true);
-            sw.WriteLine($"žaidime kuris pradėtas {_gameStartTime}, ėjimu nr {Game.Moves}" +
-                $", {Game.Board[Game.CurrentCollumn][Game.Board[Game.CurrentCollumn].Count - 1].Size} " +
-                $"dalies diskas buvo paimtas iš {(ENumberWords)Game.PreviousCollumn + 1} " +
-                $"ir padėtas į {(ENumberWords)Game.CurrentCollumn + 1}");
+            sw.WriteLine($"žaidime kuris pradėtas {_gameStartTime}, ėjimu nr {_game.Moves}" +
+                $", {_game.Board[_game.CurrentCollumn][_game.Board[_game.CurrentCollumn].Count - 1].Size} " +
+                $"dalies diskas buvo paimtas iš {(ENumberWords)_game.PreviousCollumn + 1} " +
+                $"ir padėtas į {(ENumberWords)_game.CurrentCollumn + 11}");
             sw.Close();
         }
         private void LogHtml() 
         {
             if (!File.Exists($"{Environment.CurrentDirectory}\\Logs\\{((DateTime)_gameStartTime).ToFileTime()}.html"))
             {
-                using StreamWriter header = new StreamWriter($"{_logDirectory}{((DateTime)_gameStartTime).ToFileTime()}.html");
+                using StreamWriter header = new StreamWriter($"{_logDirectory}{((DateTime)_gameStartTime).ToFileTime()}.html", true);
                 header.WriteLine(
                 $"<table border>{Environment.NewLine}" +
                 $"<tr>{Environment.NewLine}" +
@@ -63,16 +64,16 @@ namespace TowerOfHanoi.Domain.Services
                 $"<th> DISKO 2 VIETA </td>{Environment.NewLine}" +
                 $"<th> DISKO 3 VIETA </td>{Environment.NewLine}" +
                 $"<th> DISKO 4 VIETA </td>{Environment.NewLine}" +
-                $"</tr>{Environment.NewLine}");
+                $"</tr>");
                 header.Close();
             }
 
             using StreamWriter sw = new StreamWriter($"{_logDirectory}{((DateTime)_gameStartTime).ToFileTime()}.html", true);
-            List<int> locations = Game.GetLocations();
+            List<int> locations = _game.GetLocations();
             sw.WriteLine(
                 $"<tr>{Environment.NewLine}" +
                 $"<td>{_gameStartTime}</td>{Environment.NewLine}" +
-                $"<td>{Game.Moves}</td>{Environment.NewLine}" +
+                $"<td>{_game.Moves}</td>{Environment.NewLine}" +
                 $"<td>{locations[0] + 1}</td>{Environment.NewLine}" +
                 $"<td>{locations[1] + 1}</td>{Environment.NewLine}" +
                 $"<td>{locations[2] + 1}</td>{Environment.NewLine}" +
@@ -88,8 +89,15 @@ namespace TowerOfHanoi.Domain.Services
                 header.WriteLine("zaidimo_pradzios_data, ejimo_nr, disko_1_vieta, disko_2_vieta, disko_3_vieta, disko_4_vieta");
             }
             using StreamWriter sw = new StreamWriter($"{_logDirectory}{((DateTime)_gameStartTime).ToFileTime()}.csv", true);
-            List<int> locations = Game.GetLocations();
-            sw.WriteLine($"{_gameStartTime},{Game.Moves},{locations[0] + 1},{locations[1] + 1},{locations[2] + 1},{locations[3] + 1}");
+            List<int> locations = _game.GetLocations();
+            sw.WriteLine($"{_gameStartTime},{_game.Moves},{locations[0] + 1},{locations[1] + 1},{locations[2] + 1},{locations[3] + 1}");
+            sw.Close();
+        }
+        private void NoConfig()
+        {
+            Console.WriteLine("No config/failed to get config");
+            Console.ReadKey();
+            Environment.Exit(1);
         }
     }
 }

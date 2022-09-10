@@ -9,7 +9,7 @@ namespace TowerOfHanoi
         static void Main(string[] args)
         {
             Game game = new Game();
-            IInputService inputService = new InputService(game);
+            IGameService inputService = new GameService(game);
             inputService.GameStateMachine();
         }
  
