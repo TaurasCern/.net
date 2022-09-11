@@ -83,20 +83,19 @@ namespace TowerOfHanoi.Domain.Services
                 }
             }
 
-            return _isFound
+            return FormatHelpTip();
+        }
+        public string FormatHelpTip() => _isFound
                 ? $"<pagalba> - paimkite diską iš {(ENumberWords)_moveFrom} stulpelio ir padėkite į {(ENumberWords)(_moveTo + 10)}"
                 : "Pagalba negalima";
-        }
         /// <summary>
         /// Method to find helping move
         /// </summary>
         /// <param name="lines">logs in csv format</param>
         public void FindMoveCsv(string[] lines)
         {
-            var locatios = _game.GetLocations();
-            Log gameState = new Log(_game.GameStartDate, _game.Moves, locatios[0] + 1, locatios[1] + 1, locatios[2] + 1, locatios[3] + 1);
+            Log gameState = GameState();
             Log currentLog = new Log();
-
 
             _previousLog = new Log(_game.GameStartDate, 0, 1, 1, 1, 1);
 
@@ -158,5 +157,10 @@ namespace TowerOfHanoi.Domain.Services
             gameLog.ParseTxt(txtText);
             FindMoveCsv(gameLog.ToCsv());
         }
+        public Log GameState()
+        {
+            var locations = _game.GetLocations();
+            return new Log(_game.GameStartDate, _game.Moves, locations[0] + 1, locations[1] + 1, locations[2] + 1, locations[3] + 1);
+        }  
     }
 }
