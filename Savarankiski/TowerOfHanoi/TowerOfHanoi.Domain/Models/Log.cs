@@ -46,6 +46,8 @@ namespace TowerOfHanoi.Domain.Models
             ThirdDiskLocation = int.Parse(split[4]);
             FourthDiskLocation = int.Parse(split[5]);
         }
+        public string ToCsv() => $"{GameStartTime},{Move},{FirstDiskLocation},{SecondDiskLocation},{ThirdDiskLocation},{FourthDiskLocation}";
+
         public void ParseHtml(string htmlCell)
         {
             string[] lines = htmlCell.Split(Environment.NewLine);
@@ -69,6 +71,17 @@ namespace TowerOfHanoi.Domain.Models
                 ThirdDiskLocation = this.ThirdDiskLocation,
                 FourthDiskLocation = this.FourthDiskLocation,
             };
+        }
+        public override bool Equals(object? obj)
+        {
+            if(obj is not Log || obj == null) return false;
+
+            Log other = obj as Log;
+
+            return this.FirstDiskLocation == other.FirstDiskLocation 
+                && this.SecondDiskLocation == other.SecondDiskLocation
+                && this.ThirdDiskLocation == other.ThirdDiskLocation
+                && this.FourthDiskLocation == other.FourthDiskLocation;                                     
         }
     }
 }

@@ -10,8 +10,8 @@ namespace TowerOfHanoi_Tests
         [TestMethod]
         public void FormatCsvLog_Game_StringCsvLog()
         {
-            IGame fakeGame = new Game();
             DateTime fakeTime = DateTime.Now;
+            IGame fakeGame = new Game(fakeTime);
             ILogable fakeLogService = new LogService(fakeGame, fakeTime);
 
             var expected = $"{fakeTime},0,1,1,1,1";
@@ -23,8 +23,8 @@ namespace TowerOfHanoi_Tests
         [TestMethod]
         public void FormatHtmlLog_Game_StringHtmlLog()
         {
-            IGame fakeGame = new Game();
             DateTime fakeTime = DateTime.Now;
+            IGame fakeGame = new Game(fakeTime);
             ILogable fakeLogService = new LogService(fakeGame, fakeTime);
 
             var expected = $"<tr>{Environment.NewLine}" +
@@ -43,8 +43,8 @@ namespace TowerOfHanoi_Tests
         [TestMethod]
         public void FormatTxtLog_Game_StringTxtLog()
         {
-            IGame fakeGame = new Game();
             DateTime fakeTime = DateTime.Now;
+            IGame fakeGame = new Game(fakeTime);
             ILogable fakeLogService = new LogService(fakeGame, fakeTime);
 
             fakeGame.PickUp(0);

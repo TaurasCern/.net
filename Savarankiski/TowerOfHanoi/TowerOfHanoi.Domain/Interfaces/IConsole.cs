@@ -9,6 +9,7 @@ namespace TowerOfHanoi.Domain.Interfaces
 {
     public interface IConsole
     {
+        public string Message { get; set; }
         void PrintGameBoard();
     }
 }

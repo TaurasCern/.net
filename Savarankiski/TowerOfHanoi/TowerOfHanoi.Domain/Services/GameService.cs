@@ -15,7 +15,7 @@ namespace TowerOfHanoi.Domain.Services
             _game = game;
             _consoleService = new ConsoleService(_game);
             _validationService = new ValidationService(_game);
-            
+            _helperService = new HelperService(_game);
             _statisticsService = new StatisticsService();
         }
         private IGame _game;
@@ -23,10 +23,35 @@ namespace TowerOfHanoi.Domain.Services
         private IValidatable _validationService;
         private ILogable _logService;
         private IStatistics _statisticsService;
+        private IHelper _helperService;
+        public void StartGame()
+        {
+            while (true)
+            {
+                GameStateMachine();
 
+                Console.WriteLine("Ar norite zaisti dar karta?(Y/N)");
+                var choice = Console.ReadKey();
+
+                while(!(choice.Key == ConsoleKey.Y) && !(choice.Key == ConsoleKey.N))
+                {
+                    _consoleService.PrintGameBoard();
+                    Console.WriteLine("Ar norite zaisti dar karta?(Y/N)");
+                }
+
+                if(choice.Key == ConsoleKey.N) { break; }
+
+                _game = new Game(DateTime.Now);
+                _consoleService = new ConsoleService(_game);
+                _validationService = new ValidationService(_game);
+                _helperService = new HelperService(_game);
+                _statisticsService = new StatisticsService();
+            }
+            
+        }
         public void GameStateMachine()
         {
-            _logService = new LogService(_game, DateTime.Now);
+            _logService = new LogService(_game, _game.GameStartDate);
             _logService.SetConfig();
 
 
@@ -39,8 +64,7 @@ namespace TowerOfHanoi.Domain.Services
                 if (choice.Key == ConsoleKey.Escape) { Environment.Exit(1); }
                 else if (choice.Key == ConsoleKey.H)
                 {
-                    // ai
-                    // log
+                    HelpChoice();
                 }
                 else if(choice.KeyChar - 48 == 1 || choice.KeyChar - 48 == 2 || choice.KeyChar - 48 == 3) 
                 {
@@ -48,9 +72,30 @@ namespace TowerOfHanoi.Domain.Services
                     else if(_validationService.IsValidPlace(choice)) { DiskPlaceChoice(choice.KeyChar - 48); }
                 }
             }
+            ProcessVictory();
+        }
+        private void ProcessVictory()
+        {
+            _consoleService.Message = "Zaidimas Baigtas.";
             _consoleService.PrintGameBoard();
-            Console.WriteLine("win");
+
+            Console.WriteLine("Kuria statistika isspausdinti?(1 - Kiekis, 2 - Perteklis)");
+
+            var choice = Console.ReadKey();
+
+            while (!(choice.KeyChar - 48 == 1) && !(choice.KeyChar - 48 == 2))
+            {
+                _consoleService.PrintGameBoard();
+                Console.WriteLine("Kuria statistika isspausdinti?(1 - Kiekis, 2 - Perteklis)");
+                choice = Console.ReadKey();
+            }
+            _statisticsService.IsUntilWin = choice.KeyChar - 48 == 1 ? true : false;
+            
             Console.WriteLine(_statisticsService.CreateStatistics());
+        }
+        private void HelpChoice()
+        {
+            _consoleService.Message = _helperService.FindHelp();
         }
         private void DiskPickupChoice(int choice)
         {

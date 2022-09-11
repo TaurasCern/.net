@@ -9,7 +9,7 @@ namespace TowerOfHanoi.Domain.Models
 {
     public class Game : IGame
     {
-        public Game()
+        public Game(DateTime gameStartDate)
         {
             Board = new Dictionary<int, List<Disk>>()
             {
@@ -24,7 +24,10 @@ namespace TowerOfHanoi.Domain.Models
             Board[0].Add(new Disk(1, 0));
 
             PickedUpDisk = null;
+
+            GameStartDate = gameStartDate;
         }
+        public DateTime GameStartDate { get; }
         public Dictionary<int, List<Disk>> Board { get; set; }
         public Disk PickedUpDisk { get; set; }
         public int Moves { get; set; }

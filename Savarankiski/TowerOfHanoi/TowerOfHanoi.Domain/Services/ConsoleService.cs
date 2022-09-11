@@ -16,7 +16,7 @@ namespace TowerOfHanoi.Domain.Services
         {
             _game = game;
         }
-
+        public string Message { get; set; }
         public void PrintGameBoard()
         {
             Console.Clear();
@@ -39,6 +39,9 @@ namespace TowerOfHanoi.Domain.Services
                 FormatCell(_game.Board[0], 0),
                 FormatCell(_game.Board[1], 0),
                 FormatCell(_game.Board[2], 0));
+            Console.WriteLine();
+            Console.WriteLine(Message);
+            Message = "";
         }
         private string FormatCell(List<Disk> collumn, int row)
             => collumn.Count > row ?

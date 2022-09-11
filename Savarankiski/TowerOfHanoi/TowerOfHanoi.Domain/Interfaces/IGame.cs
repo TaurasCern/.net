@@ -9,6 +9,7 @@ namespace TowerOfHanoi.Domain.Interfaces
 {
     public interface IGame
     {
+        DateTime GameStartDate { get; }
         Dictionary<int, List<Disk>> Board { get; set; }
         int Moves { get; set; }
         Disk PickedUpDisk { get; set; }

@@ -8,7 +8,8 @@ namespace TowerOfHanoi.Domain.Interfaces
 {
     public interface IStatistics
     {
-        public bool IsUntilWin { get; set; }
+        bool IsUntilWin { get; set; }
         string CreateStatistics();
+        Dictionary<string, string> FindFilePriority(string[] files);
     }
 }

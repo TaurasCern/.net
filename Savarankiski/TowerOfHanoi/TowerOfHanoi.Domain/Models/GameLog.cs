@@ -21,11 +21,12 @@ namespace TowerOfHanoi.Domain.Models
         public void ParseTxt(string txtLog)
         {
             string[] lines = txtLog.Split(Environment.NewLine);
-            Log log = new Log(new DateTime(), 0, 1,1,1,1);
+            Log log = new Log(new DateTime(), 0, 1, 1, 1, 1);
 
             foreach (var line in lines)
             {
                 if(line.Length < 1) { continue; }
+                
                 string[] filteredTxt = line
                     .Replace("žaidime kuris pradėtas", "")
                     .Replace("ėjimu nr", "")
@@ -36,7 +37,6 @@ namespace TowerOfHanoi.Domain.Models
                 log.Move = int.Parse(filteredTxt[1].Trim());
 
                 int size = int.Parse(filteredTxt[2].Trim());
-                //int pickedUp = (int)Enum.Parse<ENumberWords>(filteredTxt[3].Trim());
                 int placed = (int)Enum.Parse<ENumberWords>(filteredTxt[4].Trim()) - 10;
                 
                 if(size == 1) log.FirstDiskLocation = placed;
@@ -44,10 +44,30 @@ namespace TowerOfHanoi.Domain.Models
                 if(size == 3) log.ThirdDiskLocation = placed;
                 if(size == 4) log.FourthDiskLocation = placed;
 
+                Logs.Add((Log)log.Clone());
+            }
+        }
+        public void ParseHtml(string htmlLog)
+        {
+            string[] cells = htmlLog.Split("</tr>");
+
+            for (int i = 1; i < cells.Length - 1; i++)
+            {
+                Log log = new Log(new DateTime(), 0, 1, 1, 1, 1);
+                log.ParseHtml(cells[i]);
                 Logs.Add(log);
             }
         }
-        //public void AddLog(int move, int location1, int location2, int location3, int location4) 
-        //    => Logs.Add(new Log(move, location1, location2, location3, location4));
+        public string[] ToCsv()
+        {
+            string[] lines = new string[Logs.Count + 1];
+            lines[0] = "zaidimo_pradzios_data, ejimo_nr, disko_1_vieta, disko_2_vieta, disko_3_vieta, disko_4_vieta";
+
+            for (int i = 0; i < Logs.Count; i++)
+            {
+                lines[i + 1] = Logs[i].ToCsv();
+            }
+            return lines;
+        }
     }
 }

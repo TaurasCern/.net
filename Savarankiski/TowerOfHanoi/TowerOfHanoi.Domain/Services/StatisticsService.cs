@@ -23,7 +23,7 @@ namespace TowerOfHanoi.Domain.Services
             var log = new Log();
             StringBuilder sb = Header();
 
-            Dictionary<string, string> filesFitlered = FindFilePriority();
+            Dictionary<string, string> filesFitlered = FindFilePriority(Directory.GetFiles(_logDirectory));
 
             foreach(var file in filesFitlered)
             {
@@ -83,27 +83,33 @@ namespace TowerOfHanoi.Domain.Services
 
             return sb;
         }
-        private Dictionary<string, string> FindFilePriority()
+        public Dictionary<string, string> FindFilePriority(string[] files)
         {
-            string[] filesCsv = Directory.GetFiles(_logDirectory, "*.csv");
-            string[] filesHtml = Directory.GetFiles(_logDirectory, "*.html");
-            string[] filesTxt = Directory.GetFiles(_logDirectory, "*.txt");
             Dictionary<string, string> filePriority = new Dictionary<string, string>();
 
-            foreach (var fileCsv in filesCsv)
+            foreach (var file in files)
             {
-                string[] split = fileCsv.Split("\\")[fileCsv.Split("\\").Length - 1].Split('.');
-                filePriority[split[0]] = split[1];
+                string[] split = file.Split("\\")[file.Split("\\").Length - 1].Split('.');
+                if (split[1] == "csv")
+                {                   
+                    filePriority[split[0]] = split[1];
+                }                
             }
-            foreach (var fileHtml in filesHtml)
+            foreach (var file in files)
             {
-                string[] split = fileHtml.Split("\\")[fileHtml.Split("\\").Length - 1].Split('.');
-                filePriority[split[0]] = split[1];
+                string[] split = file.Split("\\")[file.Split("\\").Length - 1].Split('.');
+                if (split[1] == "html")
+                {
+                    filePriority[split[0]] = split[1];
+                }
             }
-            foreach (var fileTxt in filesTxt)
+            foreach (var file in files)
             {
-                string[] split = fileTxt.Split("\\")[fileTxt.Split("\\").Length - 1].Split('.');
-                filePriority[split[0]] = split[1];
+                string[] split = file.Split("\\")[file.Split("\\").Length - 1].Split('.');
+                if (split[1] == "txt")
+                {
+                    filePriority[split[0]] = split[1];
+                }
             }
 
             return filePriority;
