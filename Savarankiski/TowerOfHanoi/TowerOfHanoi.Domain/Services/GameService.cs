@@ -24,6 +24,9 @@ namespace TowerOfHanoi.Domain.Services
         private ILogable _logService;
         private IStatistics _statisticsService;
         private IHelper _helperService;
+        /// <summary>
+        /// Method to Start the game loop
+        /// </summary>
         public void StartGame()
         {
             while (true)
@@ -49,6 +52,9 @@ namespace TowerOfHanoi.Domain.Services
             }
             
         }
+        /// <summary>
+        /// State machine to call chosen actions
+        /// </summary>
         public void GameStateMachine()
         {
             _logService = new LogService(_game, _game.GameStartDate);
@@ -74,6 +80,9 @@ namespace TowerOfHanoi.Domain.Services
             }
             ProcessVictory();
         }
+        /// <summary>
+        /// Method to call victory display and choose statistics
+        /// </summary>
         private void ProcessVictory()
         {
             _consoleService.Message = "Zaidimas Baigtas.";
@@ -93,15 +102,26 @@ namespace TowerOfHanoi.Domain.Services
             
             Console.WriteLine(_statisticsService.CreateStatistics());
         }
+        /// <summary>
+        /// Method to add help line for current move
+        /// </summary>
         private void HelpChoice()
         {
             _consoleService.Message = _helperService.FindHelp();
         }
+        /// <summary>
+        /// Method to "Pick up" Disk
+        /// </summary>
+        /// <param name="choice">collumn</param>
         private void DiskPickupChoice(int choice)
         {
             _game.PickUp(choice - 1);
             _consoleService.PrintGameBoard();               
         }
+        /// <summary>
+        /// Method to "Place" Disk
+        /// </summary>
+        /// <param name="choice">collumn</param>
         private void DiskPlaceChoice(int choice)
         {
             _game.Place(choice - 1);

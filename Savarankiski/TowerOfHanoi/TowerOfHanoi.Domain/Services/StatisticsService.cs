@@ -16,7 +16,11 @@ namespace TowerOfHanoi.Domain.Services
         }
         private Log _previousLog;
         private string _logDirectory = $"{Environment.CurrentDirectory}\\Logs\\";
-        public bool IsUntilWin { get; set; } = true;
+        public bool IsUntilWin { get; set; } // flag to select statistics table | true - moves until completion, false - moves over perfect win
+        /// <summary>
+        /// Method to create statistics out of the final logs out of the log files
+        /// </summary>
+        /// <returns>table of statistics</returns>
         public string CreateStatistics()
         {
             var gameLog = new GameLog();
@@ -51,6 +55,11 @@ namespace TowerOfHanoi.Domain.Services
             _previousLog = new Log();
             return sb.ToString();
         }
+        /// <summary>
+        /// Method to format completion move count cell according to IsUntilWin flag
+        /// </summary>
+        /// <param name="log">log</param>
+        /// <returns>Formatted cell</returns>
         private string FormatWinCell(Log log) 
             => IsUntilWin ? (log.IsWon ? log.Move.ToString() : "N/B") : (log.IsWon ? (log.Move - 15).ToString() : "N/B");
         private StringBuilder Header()
@@ -62,6 +71,12 @@ namespace TowerOfHanoi.Domain.Services
 
             return sb;
         }
+        /// <summary>
+        /// Method to add row to the given StringBuilder
+        /// </summary>
+        /// <param name="sb">given StringBuilder</param>
+        /// <param name="log">Log to add</param>
+        /// <returns>Table with appended log</returns>
         private StringBuilder AppendLog(StringBuilder sb, Log log)
         {
             if (sb.ToString().Split(Environment.NewLine).Length < 4)
@@ -83,6 +98,11 @@ namespace TowerOfHanoi.Domain.Services
 
             return sb;
         }
+        /// <summary>
+        /// Method to find log files priority(txt => html => csv)
+        /// </summary>
+        /// <param name="files">log file directories</param>
+        /// <returns>Dictionary<Dir\Filename, extension></returns>
         public Dictionary<string, string> FindFilePriority(string[] files)
         {
             Dictionary<string, string> filePriority = new Dictionary<string, string>();

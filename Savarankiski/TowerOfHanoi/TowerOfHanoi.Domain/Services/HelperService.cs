@@ -23,6 +23,11 @@ namespace TowerOfHanoi.Domain.Services
         private bool _isFound = false;
         private int _moveFrom = 0;
         private int _moveTo = 0;
+        /// <summary>
+        /// Method to find log files priority(csv => html => txt)
+        /// </summary>
+        /// <param name="files">array of file directories</param>
+        /// <returns>Dicktionary<Filename, File extension></returns>
         public Dictionary<string, string> FindFilePriority(string[] files)
         {
             Dictionary<string, string> filePriority = new Dictionary<string, string>();
@@ -54,6 +59,10 @@ namespace TowerOfHanoi.Domain.Services
 
             return filePriority;
         }
+        /// <summary>
+        /// Method to redirect files to appropriate method
+        /// </summary>
+        /// <returns>Help tip</returns>
         public string FindHelp()
         {
             Dictionary<string, string> files = FindFilePriority(Directory.GetFiles(_logDirectory));
@@ -78,6 +87,10 @@ namespace TowerOfHanoi.Domain.Services
                 ? $"<pagalba> - paimkite diską iš {(ENumberWords)_moveFrom} stulpelio ir padėkite į {(ENumberWords)(_moveTo + 10)}"
                 : "Pagalba negalima";
         }
+        /// <summary>
+        /// Method to find helping move
+        /// </summary>
+        /// <param name="lines">logs in csv format</param>
         public void FindMoveCsv(string[] lines)
         {
             var locatios = _game.GetLocations();
@@ -125,12 +138,20 @@ namespace TowerOfHanoi.Domain.Services
                 _previousLog = (Log)currentLog.Clone();
             }
         }
+        /// <summary>
+        /// Method to find helping move by converting html logs into csv and calling FindMoveCsv(string[] lines)
+        /// </summary>
+        /// <param name="htmlText">full html log file</param>
         public void FindMoveHtml(string htmlText)
         {
             GameLog gameLog = new GameLog();
             gameLog.ParseHtml(htmlText);
             FindMoveCsv(gameLog.ToCsv());
         }
+        /// <summary>
+        /// Method to find helping move by converting txt logs into csv and calling FindMoveCsv(string[] lines)
+        /// </summary>
+        /// <param name="txtText">full txt log file</param>
         public void FindMoveTxt(string txtText)
         {
             GameLog gameLog = new GameLog();

@@ -18,6 +18,10 @@ namespace TowerOfHanoi.Domain.Models
                 && Logs[Logs.Count - 1].ThirdDiskLocation == 3
                 && Logs[Logs.Count - 1].FourthDiskLocation == 3;
         }
+        /// <summary>
+        /// Method to parse full txt log file into normalized logs
+        /// </summary>
+        /// <param name="txtLog">full txt log</param>
         public void ParseTxt(string txtLog)
         {
             string[] lines = txtLog.Split(Environment.NewLine);
@@ -47,6 +51,10 @@ namespace TowerOfHanoi.Domain.Models
                 Logs.Add((Log)log.Clone());
             }
         }
+        /// <summary>
+        /// Method to parse full html log file into normalized logs
+        /// </summary>
+        /// <param name="htmlLog">full html log</param>
         public void ParseHtml(string htmlLog)
         {
             string[] cells = htmlLog.Split("</tr>");
@@ -58,6 +66,10 @@ namespace TowerOfHanoi.Domain.Models
                 Logs.Add(log);
             }
         }
+        /// <summary>
+        /// Method to get csv versions of the logs
+        /// </summary>
+        /// <returns>array of csv logs</returns>
         public string[] ToCsv()
         {
             string[] lines = new string[Logs.Count + 1];

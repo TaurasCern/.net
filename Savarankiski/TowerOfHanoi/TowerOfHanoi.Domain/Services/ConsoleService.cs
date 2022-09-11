@@ -21,7 +21,11 @@ namespace TowerOfHanoi.Domain.Services
         {
             Console.Clear();
             Console.WriteLine($"Ejimas: {_game.Moves}{Environment.NewLine}");
-            Console.WriteLine("Diskas rankoje: {0}{1}", _game.PickedUpDisk != null ? new string('#', _game.PickedUpDisk.Size * 2) : "", Environment.NewLine);
+            Console.WriteLine("Diskas rankoje: {0}{1}", 
+                _game.PickedUpDisk != null 
+                ? new string('#', 
+                _game.PickedUpDisk.Size * 2) 
+                : "", Environment.NewLine);
             Console.WriteLine( "1eil      |            |            |");
             Console.WriteLine("2eil{0}{1}{2}",
                 FormatCell(_game.Board[0], 3),
@@ -43,6 +47,12 @@ namespace TowerOfHanoi.Domain.Services
             Console.WriteLine(Message);
             Message = "";
         }
+        /// <summary>
+        /// Method to format a cell according to current state of the game
+        /// </summary>
+        /// <param name="collumn"></param>
+        /// <param name="row"></param>
+        /// <returns>Formated cell</returns>
         private string FormatCell(List<Disk> collumn, int row)
             => collumn.Count > row ?
                 $"{new string(' ', 6 - collumn[row].Size)}{new string('#', collumn[row].Size)}|" +

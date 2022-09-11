@@ -15,7 +15,17 @@ namespace TowerOfHanoi.Domain.Services
             _game = game;
         }
         private IGame _game;
+        /// <summary>
+        /// Mehtod to check if "Pick up" is valid
+        /// </summary>
+        /// <param name="choice">collumn choice</param>
+        /// <returns>is pickup valid</returns>
         public bool IsValidPickUp(ConsoleKeyInfo choice) => !_game.IsPickedUp && !(_game.Board[choice.KeyChar - 49].Count == 0);
+        /// <summary>
+        /// Mehtod to check if "place" is valid
+        /// </summary>
+        /// <param name="choice">collumn choice</param>
+        /// <returns>is place valid</returns>
         public bool IsValidPlace(ConsoleKeyInfo choice) => _game.IsPickedUp && _game.IsPlaceable(choice.KeyChar - 49);
     }
 }

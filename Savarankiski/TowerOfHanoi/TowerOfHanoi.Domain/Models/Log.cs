@@ -35,6 +35,9 @@ namespace TowerOfHanoi.Domain.Models
                 && ThirdDiskLocation == 3
                 && FourthDiskLocation == 3;
         }
+        /// <summary>
+        /// Method to parse csv format line into log object;
+        /// </summary>
         public void ParseCsv(string csv)
         {
             string[] split = csv.Split('\u002C');
@@ -46,8 +49,14 @@ namespace TowerOfHanoi.Domain.Models
             ThirdDiskLocation = int.Parse(split[4]);
             FourthDiskLocation = int.Parse(split[5]);
         }
+        /// <summary>
+        /// Method to get csv format of the log
+        /// </summary>
+        /// <returns></returns>
         public string ToCsv() => $"{GameStartTime},{Move},{FirstDiskLocation},{SecondDiskLocation},{ThirdDiskLocation},{FourthDiskLocation}";
-
+        /// <summary>
+        /// Method to parse html cell into log object;
+        /// </summary>
         public void ParseHtml(string htmlCell)
         {
             string[] lines = htmlCell.Split(Environment.NewLine);

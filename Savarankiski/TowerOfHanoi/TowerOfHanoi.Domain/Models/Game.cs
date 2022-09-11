@@ -34,23 +34,32 @@ namespace TowerOfHanoi.Domain.Models
         public bool IsPickedUp { get => PickedUpDisk != null; }
         public int PreviousCollumn { get; set; }
         public int CurrentCollumn { get; set; }
+        /// <summary>
+        /// Method to "Pick up" a disk from specified collumn
+        /// </summary>
+        /// <param name="collumn">index of collumns</param>
         public void PickUp(int collumn)
         {
             PickedUpDisk = (Disk)Board[collumn][Board[collumn].Count - 1].Clone();
             Board[collumn].RemoveAt(Board[collumn].Count - 1);
             PreviousCollumn = collumn;
         }
+        /// <summary>
+        /// Method to "Place" a disk to a specified collumn
+        /// </summary>
+        /// <param name="collumn">index of collumns</param>
         public void Place(int collumn)
         {
-            if (!IsPlaceable(collumn)) { return; }
-
             PickedUpDisk.Location = collumn;
             Board[collumn].Add((Disk)PickedUpDisk.Clone());
             PickedUpDisk = null;
             CurrentCollumn = collumn;
-            Moves++;
-            
+            Moves++;        
         }
+        /// <summary>
+        /// Method to get all locations from smallest to largest
+        /// </summary>
+        /// <returns> locations smallest to largest </returns>
         public List<int> GetLocations()
         {
             List<int> locations = new List<int>();
@@ -68,7 +77,17 @@ namespace TowerOfHanoi.Domain.Models
             }
             return locations;
         }
+        /// <summary>
+        /// Method to check if game if won
+        /// </summary>
+        /// <param name="collumn">3rd collumn</param>
+        /// <returns>Is the game won</returns>
         public bool IsWon(int collumn = 2) => Board[collumn].Count == 4;
+        /// <summary>
+        /// Method to check if picked up Disk is placeable at the specified collumn
+        /// </summary>
+        /// <param name="collumn"></param>
+        /// <returns></returns>
         public bool IsPlaceable(int collumn) => Board[collumn].Count == 0 ? true : Board[collumn][Board[collumn].Count - 1].Size > PickedUpDisk.Size;
 
     }

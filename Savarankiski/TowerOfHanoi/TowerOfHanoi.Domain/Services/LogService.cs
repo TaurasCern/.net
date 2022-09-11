@@ -23,24 +23,37 @@ namespace TowerOfHanoi.Domain.Services
         private DateTime? _gameStartTime = null;
         private readonly string _configPath = $"{Environment.CurrentDirectory}\\game.config";
         private readonly string _logDirectory = $"{Environment.CurrentDirectory}\\Logs\\";
+        /// <summary>
+        /// Method to call logging methos according to config
+        /// </summary>
         public void Log()
         {
-            //if (_gameStartTime == null) { _gameStartTime = DateTime.Now; }
             if (_logTxt) { LogTxt(); }
             if (_logHtml){ LogHtml(); }
             if (_logCsv) { LogCsv(); }
         }
+        /// <summary>
+        /// Method to create Txt log according to current state of the game
+        /// </summary>
+        /// <returns>Formatted txt log</returns>
         public string FormatTxtLog() 
                 => String.Format($"žaidime kuris pradėtas {_gameStartTime}, ėjimu nr {_game.Moves}" +
                 $", {_game.Board[_game.CurrentCollumn][_game.Board[_game.CurrentCollumn].Count - 1].Size} " +
                 $"dalies diskas buvo paimtas iš {(ENumberWords)_game.PreviousCollumn + 1} " +
                 $"ir padėtas į {(ENumberWords)_game.CurrentCollumn + 11}");
+        /// <summary>
+        /// Method to log in txt format
+        /// </summary>
         private void LogTxt() 
         {
             using StreamWriter sw = new StreamWriter($"{_logDirectory}{((DateTime)_gameStartTime).ToFileTime()}.txt", true);
             sw.WriteLine(FormatTxtLog());
             sw.Close();
         }
+        /// <summary>
+        /// Method to format html table cell according to the the current Disk locations
+        /// </summary>
+        /// <returns>html cell</returns>
         public string FormatHtmlLog()
         {
             List<int> locations = _game.GetLocations();
@@ -54,6 +67,9 @@ namespace TowerOfHanoi.Domain.Services
                 $"<td>{locations[3] + 1}</td>{Environment.NewLine}" +
                 $"</tr>");
         }
+        /// <summary>
+        /// Method to log in html format
+        /// </summary>
         private void LogHtml() 
         {
             if (!File.Exists($"{Environment.CurrentDirectory}\\Logs\\{((DateTime)_gameStartTime).ToFileTime()}.html"))
@@ -77,12 +93,19 @@ namespace TowerOfHanoi.Domain.Services
             sw.WriteLine(FormatHtmlLog());
             sw.Close();
         }
+        /// <summary>
+        /// Method to format csv line according to the current Disk locations
+        /// </summary>
+        /// <returns>csv log</returns>
         public string FormatCsvLog()
         {
             List<int> locations = _game.GetLocations();
 
             return $"{_gameStartTime},{_game.Moves},{locations[0] + 1},{locations[1] + 1},{locations[2] + 1},{locations[3] + 1}";
         }
+        /// <summary>
+        /// Method to log in csv format
+        /// </summary>
         private void LogCsv()
         {
             if (!File.Exists($"{Environment.CurrentDirectory}\\Logs\\{((DateTime)_gameStartTime).ToFileTime()}.csv"))
@@ -95,12 +118,18 @@ namespace TowerOfHanoi.Domain.Services
             sw.WriteLine(FormatCsvLog());
             sw.Close();
         }
+        /// <summary>
+        /// Method to stop the program if theres no config 
+        /// </summary>
         private void NoConfig()
         {
             Console.WriteLine("No config/failed to get config");
             Console.ReadKey();
             Environment.Exit(1);
         }
+        /// <summary>
+        /// Method to check and apply the config
+        /// </summary>
         public void SetConfig()
         {
             using StreamReader sr = new StreamReader(_configPath);
