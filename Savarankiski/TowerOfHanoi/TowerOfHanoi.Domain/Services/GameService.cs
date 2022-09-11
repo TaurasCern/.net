@@ -14,7 +14,7 @@ namespace TowerOfHanoi.Domain.Services
         {
             _game = game;
             _consoleService = new ConsoleService(_game);
-            _validationService = new ValidationService(_game);
+            _validationService = new ValidationService(_game, _consoleService);
             _helperService = new HelperService(_game);
             _statisticsService = new StatisticsService();
         }
@@ -46,7 +46,7 @@ namespace TowerOfHanoi.Domain.Services
 
                 _game = new Game(DateTime.Now);
                 _consoleService = new ConsoleService(_game);
-                _validationService = new ValidationService(_game);
+                _validationService = new ValidationService(_game, _consoleService);
                 _helperService = new HelperService(_game);
                 _statisticsService = new StatisticsService();
             }
@@ -70,13 +70,14 @@ namespace TowerOfHanoi.Domain.Services
                 if (choice.Key == ConsoleKey.Escape) { Environment.Exit(1); }
                 else if (choice.Key == ConsoleKey.H)
                 {
-                    HelpChoice();
+                   if(_validationService.IsValidHelp()) HelpChoice();
                 }
                 else if(choice.KeyChar - 48 == 1 || choice.KeyChar - 48 == 2 || choice.KeyChar - 48 == 3) 
                 {
                     if (_validationService.IsValidPickUp(choice)) { DiskPickupChoice(choice.KeyChar - 48); }
                     else if(_validationService.IsValidPlace(choice)) { DiskPlaceChoice(choice.KeyChar - 48); }
                 }
+                else { _consoleService.Message = "TOKIO PASIRINKIMO NERA"; }
             }
             ProcessVictory();
         }
@@ -94,12 +95,13 @@ namespace TowerOfHanoi.Domain.Services
 
             while (!(choice.KeyChar - 48 == 1) && !(choice.KeyChar - 48 == 2))
             {
-                _consoleService.PrintGameBoard();
+                Console.Clear();
                 Console.WriteLine("Kuria statistika isspausdinti?(1 - Kiekis, 2 - Perteklis)");
                 choice = Console.ReadKey();
             }
             _statisticsService.IsUntilWin = choice.KeyChar - 48 == 1 ? true : false;
-            
+
+            Console.WriteLine();
             Console.WriteLine(_statisticsService.CreateStatistics());
         }
         /// <summary>

@@ -10,5 +10,6 @@ namespace TowerOfHanoi.Domain.Interfaces
     {
         bool IsValidPickUp(ConsoleKeyInfo choice);
         bool IsValidPlace(ConsoleKeyInfo choice);
+        bool IsValidHelp();
     }
 }

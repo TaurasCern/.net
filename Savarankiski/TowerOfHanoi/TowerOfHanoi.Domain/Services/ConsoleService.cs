@@ -15,6 +15,7 @@ namespace TowerOfHanoi.Domain.Services
         public ConsoleService(IGame game)
         {
             _game = game;
+            Message = "";
         }
         public string Message { get; set; }
         public void PrintGameBoard()
@@ -44,8 +45,8 @@ namespace TowerOfHanoi.Domain.Services
                 FormatCell(_game.Board[1], 0),
                 FormatCell(_game.Board[2], 0));
             Console.WriteLine();
-            Console.WriteLine(Message);
-            Message = "";
+
+            PrintMessage();
         }
         /// <summary>
         /// Method to format a cell according to current state of the game
@@ -58,5 +59,20 @@ namespace TowerOfHanoi.Domain.Services
                 $"{new string(' ', 6 - collumn[row].Size)}{new string('#', collumn[row].Size)}|" +
                 $"{new string('#',collumn[row].Size)}{new string(' ', 6 - collumn[row].Size)}"
                 : "      |      ";
+        private void PrintMessage()
+        {
+            if (!Message.Contains("<pagalba>") && !Message.Contains("Zaidimas Baigtas"))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+            }
+
+            Console.WriteLine(Message);
+            Console.ForegroundColor = ConsoleColor.White;
+            Message = "";
+        }
     }
 }
