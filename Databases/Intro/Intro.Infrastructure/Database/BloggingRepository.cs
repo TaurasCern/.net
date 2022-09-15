@@ -46,7 +46,7 @@ namespace Intro.Infrastructure.Database
             context.SaveChanges();
         }
 
-        public void AddPerson(string firstName, string lastName, DateTime birthDate, int height)
+        public void AddPerson(string firstName, string lastName, DateTime birthDate, double height, string biography)
         {
             using var context = new BloggingContext();
 
@@ -56,6 +56,7 @@ namespace Intro.Infrastructure.Database
                 LastName = lastName,
                 BirthDate = birthDate,
                 Height = height,
+                Biography = biography
             };
             context.People.Add(person);
             context.SaveChanges();
@@ -72,6 +73,32 @@ namespace Intro.Infrastructure.Database
                 Console.WriteLine($"{person.Id},{person.FirstName}");
             }
         }
+        public void PrintAnimals()
+        {
+            using var context = new BloggingContext();
+
+            var animals = context.Animals;
+
+            foreach (var animal in animals)
+            {
+                Console.WriteLine($"{animal.Name},{animal.Type},{animal.BirthDate}");
+            }
+        }
+        public void PrintAnimalsSorted(string type)
+        {
+            using var context = new BloggingContext();
+
+            var animals = context.Animals
+                .Where(a => a.Type == type)
+                .OrderBy(a => a.Name);
+
+            foreach (var animal in animals)
+            {
+                Console.WriteLine($"{animal.Id},{animal.Name},{animal.BirthDate}");
+            }
+        }
+
+
 
         public void PrintPeopleSorted()
         {

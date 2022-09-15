@@ -25,7 +25,7 @@ namespace Intro.Domain.Models
         public string LastName { get; set; }
         public DateTime? BirthDate { get; set; }
         public string? Email { get; set; }
-        public int? Height { get; set; }
+        public double? Height { get; set; }
         public double Weight { get; set; }
         public string? Biography { get; set; }
     }
