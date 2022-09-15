@@ -15,6 +15,8 @@ namespace Intro.Infrastructure.Interfaces
         public void AddAnimal(string name, string type, DateTime birthDate);
         public void PrintPeople();
         public void PrintPeopleSorted();
-        public void PrintAnimalsSorted(string type);
+        public void PrintAnimals();
+        public void PrintAnimalsSorted();
+        public List<Animal> FetchAnimalsByType(string type);
     }
 }

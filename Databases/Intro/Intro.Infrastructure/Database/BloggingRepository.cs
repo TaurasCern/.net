@@ -73,33 +73,6 @@ namespace Intro.Infrastructure.Database
                 Console.WriteLine($"{person.Id},{person.FirstName}");
             }
         }
-        public void PrintAnimals()
-        {
-            using var context = new BloggingContext();
-
-            var animals = context.Animals;
-
-            foreach (var animal in animals)
-            {
-                Console.WriteLine($"{animal.Name},{animal.Type},{animal.BirthDate}");
-            }
-        }
-        public void PrintAnimalsSorted(string type)
-        {
-            using var context = new BloggingContext();
-
-            var animals = context.Animals
-                .Where(a => a.Type == type)
-                .OrderBy(a => a.Name);
-
-            foreach (var animal in animals)
-            {
-                Console.WriteLine($"{animal.Id},{animal.Name},{animal.BirthDate}");
-            }
-        }
-
-
-
         public void PrintPeopleSorted()
         {
             using var context = new BloggingContext();
@@ -111,5 +84,38 @@ namespace Intro.Infrastructure.Database
                 Console.WriteLine($"{person.Id},{person.FirstName}");
             }
         }
+        public void PrintAnimals()
+        {
+            using var context = new BloggingContext();
+
+            var animals = context.Animals;
+
+            foreach (var animal in animals)
+            {
+                Console.WriteLine($"{animal.Name},{animal.Type},{animal.BirthDate}");
+            }
+        }
+        public void PrintAnimalsSorted()
+        {
+            using var context = new BloggingContext();
+
+            var animals = context.Animals
+                .OrderBy(a => a.Name);
+
+            foreach (var animal in animals)
+            {
+                Console.WriteLine($"{animal.Id},{animal.Name},{animal.BirthDate}");
+            }
+        }
+        public List<Animal> FetchAnimalsByType(string type)
+        {
+            using var context = new BloggingContext();
+
+            var animals = context.Animals
+                .Where(a => a.Type == type);
+
+            return animals.ToList();
+        }
+
     }
 }

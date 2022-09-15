@@ -14,7 +14,9 @@ namespace Intro
                                   $"\n2.Display all users" +
                                   $"\n3.Display all users sorted by name" +
                                   $"\n4.Add new animal" +
-                                  $"\n5.Print animal by type (sorted by name)" +
+                                  $"\n5.Print animals" +
+                                  $"\n6.Print animals by type" +
+                                  $"\n7.Print sorted animals" +
                                   $"\nq.Quit");
 
                 char selection = Console.ReadKey().KeyChar;
@@ -51,11 +53,20 @@ namespace Intro
                         Console.WriteLine($"\nAge: (Example: 2000/01/01)");
                         DateTime animalBirthDate = DateTime.Parse(Console.ReadLine());
                         _bloggingRepository.AddAnimal(name, type, animalBirthDate);
-                        break;                      
+                        break;
                     case '5':
+                        _bloggingRepository.PrintAnimals();
+                        break;
+                    case '6':
                         Console.WriteLine($"\nPrint type:");
-                        string typeToFind = Console.ReadLine();
-                        _bloggingRepository.PrintAnimalsSorted(typeToFind);
+                        string typeToFind = Console.ReadLine();                       
+                        foreach (var animal in _bloggingRepository.FetchAnimalsByType(typeToFind))
+                        {
+                            Console.WriteLine($"{animal.Name},{animal.Type},{animal.BirthDate}");
+                        }
+                        break;
+                    case '7':
+                        _bloggingRepository.PrintAnimalsSorted();
                         break;
                     case 'q':
                         return;
