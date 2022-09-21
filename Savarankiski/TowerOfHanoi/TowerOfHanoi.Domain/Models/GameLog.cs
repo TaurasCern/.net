@@ -8,7 +8,7 @@ using TowerOfHanoi.Domain.Enums;
 namespace TowerOfHanoi.Domain.Models
 {
     public class GameLog
-    { 
+    {
         public List<Log> Logs { get; set; } = new List<Log>();
         public int Moves { get => Logs.Count; }
         public bool IsWon 
