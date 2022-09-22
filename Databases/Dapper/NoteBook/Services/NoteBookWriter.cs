@@ -1,5 +1,6 @@
 ﻿using NoteBook.Database;
 using NoteBook.Database.Dapper;
+using NoteBook.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,9 +27,11 @@ namespace NoteBook.Services
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("1. Add product");
-                Console.WriteLine("2. List products");
-                Console.WriteLine("3. Remove products by name");
+                Console.WriteLine("1. Add notebook");
+                Console.WriteLine("2. List notebooks");
+                Console.WriteLine("3. Remove notebooks by name");
+                Console.WriteLine("4. Update notebooks by id");
+                Console.WriteLine("5. Add note to a notebook");
                 Console.WriteLine("q. Quit");
 
                 selection = Console.ReadKey().KeyChar;
@@ -36,13 +39,19 @@ namespace NoteBook.Services
                 switch (selection)
                 {
                     case '1':
-                        AddProduct();
+                        AddNotebooks();
                         break;
                     case '2':
-                        DisplayProducts();
+                        DisplayNotebooks();
                         break;
                     case '3':
-                        RemoveProduct();
+                        RemoveNotebook();
+                        break;
+                    case '4':
+                        UpdateNotebook();
+                        break;
+                    case '5':
+                        AddNote();
                         break;
                     case 'q':
                         Environment.Exit(0);
@@ -53,17 +62,21 @@ namespace NoteBook.Services
                 PauseScreen();
             }
         }
-        public void DisplayProducts()
+        public void DisplayNotebooks()
         {
-            var products = _notebookRepository.Get();
+            var notebooks = _notebookRepository.Get();
 
-            foreach (var product in products)
+            foreach (var notebook in notebooks)
             {
-                Console.WriteLine($"{product.Id}. {product.Title} - {product.Description}");
+                Console.WriteLine($"{notebook.Id}. {notebook.Title} - {notebook.Description}");
+                foreach (var note in _notebookRepository.GetNotes(notebook))
+                {
+                    Console.WriteLine($"    {note.Id}. {note.NoteText}");
+                }
             }
         }
 
-        public void AddProduct()
+        public void AddNotebooks()
         {
             var newProduct = new Models.NoteBook();
             Console.WriteLine("enter name:");
@@ -80,14 +93,45 @@ namespace NoteBook.Services
             Console.WriteLine("{0}{1}Press any key to continue..", Environment.NewLine, Environment.NewLine);
             Console.ReadKey();
         }
-        public void RemoveProduct()
+        public void RemoveNotebook()
         {
             Console.WriteLine("enter name to be deleted:");
             var nameToDelete = Console.ReadLine();
 
 
-            var productsDeletedCount = _notebookRepository.Delete(nameToDelete);
-            Console.WriteLine("isttrintu irasu kieki: {0}", productsDeletedCount);
+            var notebooksDeletedCount = _notebookRepository.Delete(nameToDelete);
+            Console.WriteLine("isttrintu irasu kieki: {0}", notebooksDeletedCount);
+        }
+        public void UpdateNotebook()
+        {
+            Console.WriteLine("enter id to be updated:");
+            var idToDelete = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("title:");
+            var title = Console.ReadLine();
+
+            Console.WriteLine("description:");
+            var description = Console.ReadLine();
+
+            Console.WriteLine("priority:");
+            var priority = Console.ReadLine();
+
+            var notebookUpdate = new Models.NoteBook() { Title = title, Description = description, Priority = priority };
+
+            var notebooksDeletedCount = _notebookRepository.Update(idToDelete, notebookUpdate);
+            Console.WriteLine("atnaujintu irasu kiekis: {0}", notebooksDeletedCount);
+        }
+        public void AddNote()
+        {
+            Console.WriteLine("enter notebook id:");
+            var notebookId = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("enter note text:");
+            var noteText = Console.ReadLine();
+
+            var newNote = new Note() { NoteText = noteText, NotebookId = notebookId };
+
+            _notebookRepository.CreateNote(newNote);
         }
     }
 }

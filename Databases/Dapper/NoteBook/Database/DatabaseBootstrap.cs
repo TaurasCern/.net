@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Data.Sqlite;
 using NoteBook.Database.Dapper;
+using NoteBook.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,14 +28,22 @@ namespace NoteBook.Database
                 FROM sqlite_master
                 WHERE type = 'table'
                     AND name = 'Notebook';").FirstOrDefault();
-            if (!string.IsNullOrEmpty(tableName) && tableName == "Product") { return; }
+            if (!string.IsNullOrEmpty(tableName) && tableName == "Notebook") { return; }
             connection.Execute(@"
                 CREATE TABLE Notebook (
                 Id INTEGER PRIMARY KEY AUTOINCREMENT,
                 Title VARCHAR(100) NOT NULL,
                 Description VARCHAR(1000) NOT NULL,
                 CreationDateTime DATETIME DEFAULT current_timestamp,
-                Priority VARCHAR(100) NULL);");
+                Priority VARCHAR(100) NULL);
+                
+                CREATE TABLE Note( 
+                Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                NoteText VARCHAR(100) NOT NULL,
+                CreationDatetime DATETIME DEFAULT current_timestamp,
+                NotebookId INTEGER NOT NULL,
+                FOREIGN KEY (NotebookId) REFERENCES Notebook (Id));");
+                
         }
     }
 }

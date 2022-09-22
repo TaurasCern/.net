@@ -46,5 +46,43 @@ namespace NoteBook.Database
 
             return affectedRows;
         }
+        public int Update(int id, Models.NoteBook notebook)
+        {
+            using var connection = new SqliteConnection(_databaseConfig.ConnString);
+
+            var affectedRows = connection.Execute(@"
+                UPDATE Notebook
+                SET Title = @Title,
+                    Description = @Description,
+                    CreationDateTime = @CreationDateTime,
+                    Priority = @Priority
+                WHERE Id = @Id",
+                new { Title = notebook.Title,
+                      Description = notebook.Description,
+                      CreationDateTime = notebook.CreationDateTime,
+                      Priority = notebook.Priority,
+                      Id = id });
+                
+            return affectedRows;
+        }
+        public void CreateNote(Note note)
+        {
+            using var connection = new SqliteConnection(_databaseConfig.ConnString);
+
+            connection.Execute(@"
+                INSERT INTO Note (NoteText, CreationDateTime, NotebookId)
+                VALUES (@NoteText, @CreationDateTime, @NotebookId);", 
+                new { NoteText = note.NoteText, CreationDateTime = note.CreationDatetime, NotebookId = note.NotebookId });
+        }
+
+        public IEnumerable<Note> GetNotes(Models.NoteBook notebook)
+        {
+            using var connection = new SqliteConnection(_databaseConfig.ConnString);
+
+            return connection.Query<Note>(@"
+                SELECT *
+                FROM Note
+                WHERE NotebookId = @Id", new { Id = notebook.Id });
+        }
     }
 }
