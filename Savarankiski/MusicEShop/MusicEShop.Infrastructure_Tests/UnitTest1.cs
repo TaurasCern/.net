@@ -18,15 +18,18 @@ namespace MusicEShop.Infrastructure_Tests
                 .UseInMemoryDatabase(databaseName: "chinook")
                 .Options;
             context = new chinookContext(options);
+            context.Tracks.RemoveRange(context.Tracks);
+            context.Customers.RemoveRange(context.Customers);
+
             context.Tracks.Add(new Track { TrackId = 1, Name = "Pavadinimas1", MediaTypeId = 1, Milliseconds = 300000, Status = "Active" });
-            context.Tracks.Add(new Track { TrackId = 2, Name = "Pavadinimas2", MediaTypeId = 1, Milliseconds = 350000, Status = "Active" });
+            context.Tracks.Add(new Track { TrackId = 2, Name = "Pavadinimas2", MediaTypeId = 2, Milliseconds = 350000, Status = "Active" });
 
             context.Customers.Add(new Customer { CustomerId = 1, FirstName = "Vardas1", LastName = "Pavarde1", Email = "email@email.com" });
             context.SaveChanges();
         }
 
 
-
+        
         [TestMethod]
         public void Handle_CustomerMenu_IEnumerableCustomers()
         {
@@ -47,6 +50,7 @@ namespace MusicEShop.Infrastructure_Tests
             Assert.AreEqual(actual.Email, expected.Email);
         }
         [TestMethod]
+        
         public void Handle_UpdateTrackStatus()
         {
             IMusicEShopRepository repository = new MusicEShopRepository(context);
@@ -56,20 +60,19 @@ namespace MusicEShop.Infrastructure_Tests
             IMusicEShopRepositoryHandler<IEnumerable<object>> repositoryHandler = new MusicEShopRepositoryHandler<IEnumerable<object>>(
                 menuHandler, repository, input, menuService);
 
-            menuService.SetTrack(context.Tracks.Find(1));
+            menuService.SetTrack(context.Tracks.Find((long)1));
             menuHandler.SetMenuState("Change track");
+            repositoryHandler.Handle();
 
-            var actual = context.Tracks.Find(1);
+            var actual = context.Tracks.Find((long)1);
             var expected = new Track() { TrackId = 1, Name = "Pavadinimas1", MediaTypeId = 1, Milliseconds = 300000, Status = "Inactive" };
 
             Assert.AreEqual(actual.TrackId, expected.TrackId);
             Assert.AreEqual(actual.Status, expected.Status);
         }
 
-
-
         [TestMethod]
-        public void Repository()
+        public void Repository_GetAllCustomers()
         {
             IMusicEShopRepository repository = new MusicEShopRepository(context);
 

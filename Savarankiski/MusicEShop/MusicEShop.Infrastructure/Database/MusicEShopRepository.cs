@@ -41,7 +41,6 @@ namespace MusicEShop.Infrastructure.Database
 
             return addedInvoice.Entity.InvoiceId;
         }
-
         public void UpdateTrack(Track track)
         {
             _context.Update(track);

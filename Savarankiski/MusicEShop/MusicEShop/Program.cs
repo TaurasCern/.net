@@ -15,8 +15,8 @@ namespace MusicEShop
             IInputService inputService = new InputService(menuHandler);
             IMenuService menuService = new MenuService(menuHandler);
             IMusicEShopRepositoryHandler<IEnumerable<object>> repositoryHandler = 
-                new MusicEShopRepositoryHandler<IEnumerable<object>>(
-                    menuHandler, new MusicEShopRepository(
+                new MusicEShopRepositoryHandler<IEnumerable<object>>(menuHandler,                     
+                    new MusicEShopRepository(
                         new chinookContext()), inputService, menuService);
 
             IEnumerable<object> result = null;
