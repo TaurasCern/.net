@@ -1,0 +1,14 @@
+a{
+    font-size: large;
+    font-weight: bold;
+    color: brown;
+    padding-left: 25px;
+    margin-bottom: 25px;
+    border: 1px solod black;
+}
+nav {
+    background-color: darkgray;
+    padding: 25px;
+    margin-bottom: 25px;
+    text-align: center;
+}
