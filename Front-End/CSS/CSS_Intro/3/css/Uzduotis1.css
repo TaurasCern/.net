@@ -1,0 +1,13 @@
+.item-flex {
+    height: 50px;
+    background-color: yellow;
+    border: 2px solid blue;
+    min-width: 50px;
+    flex: 1;
+}
+.container-flex {
+    display: flex;
+}
+.container-inline-flex{
+    display: inline-flex;
+}
