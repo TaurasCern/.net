@@ -14,6 +14,7 @@ const printAnimals = () => {
     fetch(url, options)
     .then(response => {return response.json()})
     .then((data) => {
+        console.log(data);
         for (const obj of data.data) {
             for (const i in obj) {
                 animalsContainer.innerHTML += `${i}: ${obj[i]}<br>`;

@@ -1,0 +1,10 @@
+#placeholder {
+    display: inline-block;
+    height: 52px;
+}
+
+article div {
+    background-color: lightblue;
+    padding: 30px;
+    border-radius: 40px;
+}

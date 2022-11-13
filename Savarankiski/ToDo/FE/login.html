@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Baigiamasis FrontEnd darbas"/>
+    <meta name="author" content="Tauras Černiauskas"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/body.css">
+    <link rel="stylesheet" href="css/login.css">
+    <title>Document</title>
+</head>
+<body>
+    <main class="container main-class">
+        <header class="main-header">
+            <h1>Užrašų tinklapis</h1>
+            <nav id="nav-bar">
+                <a href="index.html">Pagrindinis</a>
+                <div id="acc-container">
+                    <a href="register.html" id="register-btn">Registracija</a>         
+                </div>
+            </nav>
+        </header>
+        <article>
+            <form id="login-form">
+                <label for="email">El. Paštas:</label>
+                <input type="email" name="email" id="email" placeholder="john.doe@gmail.com" autocomplete="off"><br/>
+                <label for="password">Slaptažodis:</label>
+                <input type="password" name="password" id="password" placeholder="********" autocomplete="off"><br/>
+                <input type="button" class="input-button" value="Prisijungti" id="login-btn">
+            </form>
+        </article>
+        <footer>
+            
+        </footer>
+    </main>
+    <script src="scripts/login.js"></script>
+</body>
+</html>

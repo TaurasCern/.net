@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Baigiamasis FrontEnd darbas"/>
+    <meta name="author" content="Tauras Černiauskas"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/body.css">
+    <link rel="stylesheet" href="css/register.css">
+    <title>Document</title>
+</head>
+<body>
+    <main class="container main-class">
+        <header class="main-header">
+            <h1>Užrašų tinklapis</h1>
+            <nav id="nav-bar">
+                <a href="index.html">Pagrindinis</a>
+                <div id="acc-container">
+                    <a href="login.html" id="login-btn">Prisijungti</a>    
+                </div>
+            </nav>
+        </header>
+        <article>
+            <form id="register-form">
+
+                <label for="email">El. Paštas:</label>
+                <input type="email" name="email" id="email" placeholder="jon.doe@email.com" autocomplete="off"><br>
+
+                <label for="firstName">Vardas:</label>
+                <input type="text" name="firstName" id="firstName" placeholder="Jon" autocomplete="off"><br>
+
+                <label for="lastName">Pavardė:</label>
+                <input type="text" name="lastName" id="lastName" placeholder="Doe" autocomplete="off"><br>
+            
+                <label for="password">Slaptažodis:</label>
+                <input type="password" name="password" id="password" placeholder="********"><br>
+
+                <label for="password">Pakartokite slaptažodį:</label>
+                <input type="password" name="password-re" id="password-re" placeholder="********"><br>
+        
+                <input type="button" class="input-button" value="Registruotis" id="register-btn">
+            </form>
+        </article>
+        <footer>
+            
+        </footer>
+    </main>
+    <script src="scripts/register.js"></script>
+</body>
+</html>
