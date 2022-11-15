@@ -4,7 +4,7 @@ window.onload = () => {
     }
 }
 
-const url = `http://localhost:5218/api/User`;
+
 const registerForm = document.querySelector(`#register-form`)
 const registerBtn = document.querySelector(`#register-btn`);
 
@@ -19,24 +19,14 @@ const register = () => {
     if(!registerValidation(data)) { return; }
 
     let obj = {
-        userId: 0,
         email: data.get(`email`),
         password: data.get(`password`),
         firstName: data.get(`firstName`),
         lastName: data.get(`lastName`),
-        toDoNotes: null
     };
 
-    console.log(`reached`);
-    fetch(url, {
-        method: `post`,
-        headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(obj)
-    })
-    .then(response => { return response.json() })
+    
+    userPost(obj)
     .then(data => {
         if(data.statusCode === 200) {
             localStorage.setItem(`isLoggedIn`, true);
@@ -46,7 +36,7 @@ const register = () => {
         }
         else localStorage.setItem(`isLoggedIn`, false);
     })
-    .catch(err => console.log(err));  
+    .catch(err => console.log(err));
 }
 
 const registerValidation = (data) => {

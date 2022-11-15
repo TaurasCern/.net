@@ -9,27 +9,37 @@ window.onload = () => {
 
 }        
 
-const userUrl = `http://localhost:5218/api/ToDoNote?userId=`;
-const userOptions = {
-    method: `get`,
-    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    },
+const configureMinDate = () => {
+    let date = new Date(Date.now());
+    date.setHours(date.getHours() + 1);
+
+    let hour = String(date.getHours()).padStart(2, `0`);
+    let day = String(date.getDate()).padStart(2, `0`);
+    let minutes = String(date.getMinutes()).padStart(2, `0`);
+    let month = String(date.getMonth() + 1).padStart(2, `0`);
+
+    return `${date.getFullYear()}-${month}-${day}T${hour}:${minutes}`;
 }
 
-const notePostUrl = `https://localhost:7218/api/ToDoNote`
-
+const deleteNote = (id) => {
+    fetchDelete(id)
+    .then(note => {
+            document.querySelector(`#note-${note.noteId}`).outerHTML = ``;
+            if(isPutFormOpen[id]){
+                closeEditNoteForm(id);
+            }
+    })
+}
 let isFormOpen = false;
 
 const nameDisplay = document.querySelector(`#name-display`);
 const navBar = document.querySelector(`#nav-bar`)
 
 const display = () => {
-    fetch(userUrl + localStorage.getItem(`userId`), userOptions)
-    .then(responce => {return responce.json()})
+
+    fetchGet(localStorage.getItem(`userId`))
     .then(data => {
-        displayNotes(data);
+        displayNotes(data)
     })
 }
 
@@ -61,7 +71,7 @@ const formatNoteContainer = (note) => {
                 minute: '2-digit'
             })}</p></div>
             <button onclick="deleteNote(${note.noteId})">Ištrinti</button>
-            <button onclick="putNote(${note.noteId})" id="put-note-button-${note.noteId}">Keisti</button>
+            <button onclick="editNote(${note.noteId})" id="put-note-button-${note.noteId}">Keisti</button>
         </div>
     </div>`;
 }

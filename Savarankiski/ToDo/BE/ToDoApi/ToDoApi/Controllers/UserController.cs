@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ToDoApi.Database;
+using ToDoApi.DTOs;
 using ToDoApi.Models;
 
 namespace ToDoApi.Controllers
@@ -17,17 +18,16 @@ namespace ToDoApi.Controllers
         }
 
         [HttpPost]
-        public JsonResult Post(User user)
+        public JsonResult Post(UserDTO user)
         {
-            if (user.ToDoNotes != null) return new JsonResult(BadRequest(user));
-
             if(_context.Users.Where(u => u.Email == user.Email).FirstOrDefault() != null) return new JsonResult(BadRequest(new {reason = "Already exists"}));
 
-            _context.Users.Add(user);
+            var newUser = new User(user);
+
+            _context.Users.Add(newUser);
 
             _context.SaveChanges();
-
-            return new JsonResult(Ok(new { id = user.UserId, name = $"{user.FirstName} {user.LastName}" }));
+            return new JsonResult(Ok(new { id = newUser.UserId, name = $"{newUser.FirstName} {newUser.LastName}" }));
         }
         [HttpGet]
         public JsonResult GetAll()

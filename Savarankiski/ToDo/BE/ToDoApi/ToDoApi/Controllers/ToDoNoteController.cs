@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ToDoApi.Database;
+using ToDoApi.DTOs;
 using ToDoApi.Models;
 
 namespace ToDoApi.Controllers
@@ -16,17 +17,21 @@ namespace ToDoApi.Controllers
             _context = context;
         }
         [HttpPost]
-        public JsonResult Get(ToDoNote note)
+        public JsonResult Post(ToDoNoteDTO note)
         {
+
+
             var user = _context.Users.Find(note.UserId);
         
             if (user == null) return new JsonResult(NotFound());
-        
-            user.ToDoNotes.Add(note);
+
+            ToDoNote newNote = new ToDoNote(note);
+
+            user.ToDoNotes.Add(newNote);
         
             _context.SaveChanges();
         
-            return new JsonResult(Ok(note));
+            return new JsonResult(Ok(newNote));
         }
         [HttpGet]
         public JsonResult Get(int userId)
@@ -48,7 +53,7 @@ namespace ToDoApi.Controllers
             }));
         }
         [HttpPut]
-        public JsonResult Put(ToDoNote note)
+        public JsonResult Put(ToDoNoteDTO note)
         {
             if (note == null) return new JsonResult(BadRequest());
 

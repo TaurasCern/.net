@@ -4,7 +4,8 @@ window.onload = () => {
     }
 }
 
-const url = `http://localhost:5218/login`;
+let url = `http://localhost:5218/login`;
+
 const loginForm = document.querySelector(`#login-form`)
 const loginBtn = document.querySelector(`#login-btn`);
 
@@ -23,7 +24,7 @@ const login = () => {
     fetch(url, {
         method: `post`,
         headers: {
-            'Accept': 'application/json, text/plain, */*',
+            'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(obj)
