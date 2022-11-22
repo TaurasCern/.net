@@ -15,5 +15,4 @@ const loadAcc = () => {
     let script = document.createElement(`script`);
     script.setAttribute(`src`, `scripts/logout.js`);
     document.body.appendChild(script);
-    console.log(script);
 }

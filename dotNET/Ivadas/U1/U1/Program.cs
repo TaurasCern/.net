@@ -1,7 +1,4 @@
-using BookApi.Interfaces;
-using BookApi.Services;
-
-namespace BookApi
+namespace U1
 {
     public class Program
     {
@@ -11,27 +8,17 @@ namespace BookApi
 
             // Add services to the container.
 
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("_allowAny",
-                    policy =>
-                    {
-                        policy
-                        .AllowAnyOrigin()
-                        .AllowAnyHeader()
-                        .AllowAnyMethod();
-                    });
-            });
-
             builder.Services.AddControllers();
-
-            builder.Services.AddSingleton<IBookSet, BookSet>();
-            builder.Services.AddTransient<IBookWrapper, BookWrapper>();
-            builder.Services.AddTransient<IBookManager, BookManager>();
-
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+            {
+                builder.WithOrigins("*")
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            }));
 
             var app = builder.Build();
 
@@ -41,7 +28,8 @@ namespace BookApi
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-            app.UseCors("_allowAny");
+
+            app.UseCors("corsapp");
 
             app.UseHttpsRedirection();
 

@@ -1,4 +1,6 @@
-﻿using BookApi.Models;
+﻿using BookApi.Interfaces;
+using BookApi.Models.Concrete;
+using BookApi.Models.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,44 +10,56 @@ namespace BookApi.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
-        List<Book> Books = new List<Book>()
-            {
-                new Book(1, "title1", "author1", 1990),
-                new Book(2, "title2", "author2", 1990),
-                new Book(3, "title3", "author2", 1990),
-                new Book(4, "title4", "author2", 1990),
-                new Book(5, "title5", "author3", 1990),
-                new Book(6, "title6", "author4", 1990),
-                new Book(7, "title7", "author5", 1990),
-                new Book(8, "title8", "author6", 1990),
-                new Book(9, "title9", "author7", 1990),
-                new Book(10, "title10", "author8", 1990),
-            };
+        private readonly IBookSet _bookSet;
+        private readonly IBookWrapper _bookWrapper;
+        private readonly IBookManager _bookManager;
+        public BookController(IBookSet bookSet, IBookWrapper bookWrapper, IBookManager bookManager)
+        {
+            _bookSet = bookSet;
+            _bookWrapper = bookWrapper;
+            _bookManager = bookManager;
+        }
 
         [HttpGet]
-        public IEnumerable<Book> Get()
+        public ActionResult<List<GetBookDTO>> Get() 
         {
-            return Books;
+            return Ok(_bookManager.Get());
         }
-        [HttpGet("byId/{id}")]
-        public Book? Get(int id)
+        [HttpGet("{id}")]
+        public ActionResult<GetBookDTO> GetById(int id)
         {
-            return Books.Where(b => b.Id == id).FirstOrDefault();
+            return Ok(_bookManager.Get(id));
         }
-        [HttpGet("byTitle/{title}")]
-        public Book? GetByTitle(string title)
+
+        [HttpGet("filter")]
+        public ActionResult<List<GetBookDTO>> GetFilter(FilterBookRequest request)
         {
-            return Books.Where(b => b.Title == title).FirstOrDefault();
+            Dictionary<string, string> filter = new Dictionary<string, string>();
+
+            filter.Add(nameof(request.Pavadinimas), request.Pavadinimas);
+            filter.Add(nameof(request.Autorius), request.Autorius);
+            filter.Add(nameof(request.KnygosTipas), request.KnygosTipas);
+            
+            return Ok(_bookManager.Filter(filter));
         }
-        [HttpGet("query1")]
-        public IEnumerable<Book?> GetByAuthor(string author)
+
+        [HttpPost]
+        public ActionResult Post(CreateBookDTO book)
         {
-            return Books.Where(b => b.Author == author);
+            return Ok(_bookManager.Add(book));
         }
-        [HttpGet("query2")]
-        public IEnumerable<Book?> GetByTitleAndAuthor(string title, string author)
+
+        [HttpPut]
+        public ActionResult Put(UpdateBookDTO book)
         {
-            return Books.Where(b => b.Title.ToLower().Contains(title.ToLower()) && b.Author == author);
+            _bookManager.Update(book);
+            return Ok();
+        }
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _bookManager.Delete(id);
+            return Ok();
         }
     }
 }
